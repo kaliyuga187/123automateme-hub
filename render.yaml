@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: 123automateme-hub
+    runtime: node
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      # Add these in the Render dashboard (DO NOT commit real values):
+      # - RESEND_API_KEY
+      # - CONTACT_TO_EMAIL
+      # - CONTACT_FROM_EMAIL
+      # - CONTACT_WEBHOOK_URL

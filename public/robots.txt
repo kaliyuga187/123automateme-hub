@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://123automateme.com/sitemap.xml
