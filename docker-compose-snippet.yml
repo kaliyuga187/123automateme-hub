@@ -1,0 +1,13 @@
+  # 123automateme.com — public landing page (added 2026-06-13)
+  hub:
+    image: k187-hub:latest
+    container_name: k187-hub
+    restart: unless-stopped
+    networks:
+      - nexus
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3738/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
