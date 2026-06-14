@@ -13,7 +13,7 @@
     "test": "echo 'no tests yet — landing page is content + form, not logic' && exit 0"
   },
   "dependencies": {
-    "next": "15.1.0",
+    "next": "15.5.18",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "resend": "4.0.1",
