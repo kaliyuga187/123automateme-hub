@@ -500,14 +500,12 @@ function PortfolioGrid() {
           {products.map((p, i) => (
             <div
               key={i}
-              className="group relative rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 cyber-card"
+              className="group relative rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-pink-500/40 cyber-card"
               style={{
                 background: 'var(--cp-bg-card)',
                 borderColor: 'var(--cp-border)',
                 animationDelay: `${i * 80}ms`,
               }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(236,72,153,0.4)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--cp-border)')}
             >
               {/* Status badge */}
               <div className="flex items-center justify-between mb-4">
