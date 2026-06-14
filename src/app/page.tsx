@@ -1,117 +1,351 @@
 import Link from 'next/link';
 import {
-  ArrowRight, ArrowUpRight, Check, Plus, Minus,
-  Sparkles, Cpu, LineChart, Rocket, ShieldCheck, Bot, Code2, Wrench,
-  Workflow, Mail, Phone, MessageSquare, ChevronRight, Zap,
-  Activity, GitBranch, Globe, Clock, Terminal, Layers, Star,
+  ArrowRight, Check, Plus, Minus,
+  Sparkles, Cpu, LineChart, Rocket, ShieldCheck, Bot, Code2,
+  Workflow, Mail, Phone, ChevronRight, Zap,
+  Activity, Globe, Clock, Star, Gamepad2, Hexagon,
 } from 'lucide-react';
 
 /* ════════════════════════════════════════════════════════════════
-   123automateme.com — landing page (2026 redesign)
+   123automateme.com — Cyberpunk Legends Redesign (2026)
+   Dark purple/black + neon pink/magenta + electric purple
    Sections:
-     1. Hero (asymmetric, floating command-center visual)
-     2. Logo / "built with" strip
-     3. Stats row
-     4. Services (bento grid)
+     1. Hero (dramatic, card-game aesthetic)
+     2. Built With Strip (tech credibility)
+     3. Stats Row
+     4. Products Portfolio (bento grid)
      5. Process (zig-zag, 4 steps)
-     6. Featured product (MetaLaunch AI)
-     7. Secondary product (K187 Bot Store)
-     8. Pull quote
+     6. Featured Product (KAIO'S CARDS)
+     7. Services (what we build)
+     8. Pull Quote
      9. FAQ
-    10. Final CTA + Contact form
-   ════════════════════════════════════════════════════════════════ */
+    10. Final CTA + Contact
+════════════════════════════════════════════════════════════════ */
+
+/* ─── CSS tokens injected inline for zero-config ─── */
+const cyberpunkCSS = `
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root {
+  --cp-bg: #0a0514;
+  --cp-bg-card: rgba(15, 8, 30, 0.8);
+  --cp-border: rgba(168, 85, 247, 0.15);
+  --cp-border-hover: rgba(236, 72, 153, 0.4);
+  --cp-pink: #ec4899;
+  --cp-magenta: #d946ef;
+  --cp-purple: #a855f7;
+  --cp-electric: #7c3aed;
+  --cp-cyan-glow: rgba(168, 85, 247, 0.3);
+  --cp-pink-glow: rgba(236, 72, 153, 0.3);
+}
+.font-cyber { font-family: 'Orbitron', sans-serif; }
+.font-raj { font-family: 'Rajdhani', sans-serif; }
+.font-jb { font-family: 'JetBrains Mono', monospace; }
+@keyframes hex-drift {
+  0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50% { transform: translateY(-12px) rotate(3deg); opacity: 0.15; }
+}
+@keyframes neon-pulse {
+  0%,100% { box-shadow: 0 0 20px var(--cp-pink-glow), 0 0 40px rgba(236,72,153,0.1); }
+  50% { box-shadow: 0 0 30px var(--cp-pink-glow), 0 0 60px rgba(236,72,153,0.2); }
+}
+@keyframes glow-line {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes cyber-card-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hex-bg-line {
+  animation: hex-drift 8s ease-in-out infinite;
+}
+.neon-border {
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+.glow-underline {
+  background: linear-gradient(90deg, var(--cp-pink), var(--cp-magenta), var(--cp-purple));
+  background-size: 200% 100%;
+  animation: glow-line 3s linear infinite;
+}
+.cyber-card { animation: cyber-card-in 0.6s ease-out both; }
+`;
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <LogoStrip />
-      <StatsRow />
-      <Services />
-      <Process />
-      <FeaturedProduct />
-      <SecondaryProduct />
-      <PullQuote />
-      <FAQ />
-      <FinalCTA />
+      <style>{cyberpunkCSS}</style>
+      <div className="min-h-screen text-white" style={{ background: 'var(--cp-bg)' }}>
+        <Header />
+        <Hero />
+        <TechStrip />
+        <StatsRow />
+        <PortfolioGrid />
+        <ProcessSection />
+        <FeaturedProduct />
+        <ServicesSection />
+        <PullQuote />
+        <FAQSection />
+        <FinalCTA />
+        <Footer />
+      </div>
     </>
   );
 }
 
-/* ── 1. Hero ────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   1. HEADER
+═══════════════════════════════════════════════════════════════ */
+function Header() {
+  return (
+    <header className="fixed top-0 w-full z-50 border-b" style={{
+      background: 'rgba(10, 5, 20, 0.85)',
+      backdropFilter: 'blur(20px)',
+      borderColor: 'var(--cp-border)',
+    }}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+            background: 'linear-gradient(135deg, #ec4899, #d946ef, #a855f7)',
+            boxShadow: '0 0 20px rgba(236,72,153,0.3)',
+          }}>
+            <Hexagon className="w-5 h-5 text-white" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-cyber font-bold text-lg tracking-wider text-white">123AUTO</span>
+            <span className="font-raj text-xs text-purple-400 -mt-1 tracking-widest">ME.COM</span>
+          </div>
+        </Link>
 
+        {/* Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {['Portfolio', 'Products', 'Services', 'Process', 'FAQ'].map(item => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="font-raj text-sm text-purple-300/80 hover:text-white transition-colors tracking-wide"
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTAs */}
+        <div className="flex items-center gap-3">
+          <a
+            href="#contact"
+            className="hidden sm:flex px-4 py-2 rounded-lg border font-raj text-sm tracking-wide text-purple-300 hover:text-white hover:border-pink-500/50 transition-all"
+            style={{ borderColor: 'var(--cp-border)' }}
+          >
+            CONTACT
+          </a>
+          <a
+            href="#portfolio"
+            className="px-5 py-2.5 rounded-lg font-raj text-sm font-bold tracking-wide text-white transition-all hover:scale-105"
+            style={{
+              background: 'linear-gradient(135deg, #ec4899, #d946ef)',
+              boxShadow: '0 0 20px rgba(236,72,153,0.4)',
+            }}
+          >
+            EXPLORE
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. HERO — dramatic cyberpunk card-game aesthetic
+═══════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Faint grid + radial accents */}
-      <div aria-hidden className="absolute inset-0 grid-bg pointer-events-none" />
-      <div aria-hidden className="absolute -top-40 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
+    <section className="relative pt-28 pb-24 overflow-hidden min-h-[90vh] flex items-center">
+      {/* Hex grid background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04]" viewBox="0 0 800 600">
+          <defs>
+            <pattern id="hexGrid" width="60" height="52" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
+              <polygon points="30,1 55,15 55,37 30,51 5,37 5,15" fill="none" stroke="#a855f7" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hexGrid)"/>
+        </svg>
+        {/* Radial glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full" style={{
+          background: 'radial-gradient(ellipse, rgba(168,85,247,0.12) 0%, rgba(236,72,153,0.06) 40%, transparent 70%)',
+        }}/>
+      </div>
 
-      <div className="container-page relative pb-16 pt-20 sm:pb-24 sm:pt-28 lg:pb-32 lg:pt-32">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* ── Copy (7 cols) ── */}
-          <div className="lg:col-span-7">
-            <div className="eyebrow">
-              <span className="live-dot" />
-              <span>Now booking Q3 builds</span>
-            </div>
+      <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center w-full">
+        {/* LEFT: Copy */}
+        <div className="space-y-8">
+          {/* Status badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{
+            background: 'rgba(168,85,247,0.08)',
+            borderColor: 'rgba(168,85,247,0.2)',
+          }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-500 opacity-75"/>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"/>
+            </span>
+            <span className="font-jb text-xs text-purple-300 tracking-wide">
+              6 LIVE PRODUCTS ● ACCEPTING CLIENTS
+            </span>
+          </div>
 
-            <h1 className="h-display">
-              <span className="block">Autonomous AI</span>
-              <span className="block">
-                that works{' '}
-                <span className="relative inline-block">
-                  <span className="gradient-text-cyan">while you sleep</span>
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 200 12"
-                    className="absolute -bottom-2 left-0 h-3 w-full text-accent2/60"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 8 Q 50 2, 100 6 T 198 5"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                .
+          {/* H1 */}
+          <h1 className="font-cyber text-5xl lg:text-7xl font-black tracking-tight leading-[0.9]">
+            <span className="block text-white">AUTOMATE</span>
+            <span className="block text-purple-400 mt-2">EVERYTHING</span>
+            <span className="block relative mt-2">
+              <span className="text-transparent bg-clip-text" style={{
+                backgroundImage: 'linear-gradient(135deg, #ec4899, #d946ef, #a855f7)',
+              }}>
+                SHIP FASTER
               </span>
-            </h1>
+              {/* Glow underline */}
+              <div className="mt-2 h-1 w-48 rounded-full glow-underline opacity-60"/>
+            </span>
+          </h1>
 
-            <p className="lede mt-7 max-w-xl">
-              We design, build, and operate production-grade AI systems for
-              crypto trading, token launches, and bespoke business workflows.
-              Real agents, real revenue, no demo-ware.
-            </p>
+          {/* Lede */}
+          <p className="font-raj text-xl text-purple-200/70 leading-relaxed max-w-xl">
+            Full-stack SaaS products, trading bots, AI agents, and custom automation.
+            Built by a solo developer, deployed to production, live and earning.
+          </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href="#contact" className="btn-primary">
-                Start a project <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="#products" className="btn-ghost">
-                See live products
-              </Link>
-            </div>
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#portfolio"
+              className="group px-8 py-4 rounded-xl font-raj font-bold text-lg tracking-wide transition-all hover:scale-105 flex items-center gap-3"
+              style={{
+                background: 'linear-gradient(135deg, #ec4899, #d946ef)',
+                boxShadow: '0 0 30px rgba(236,72,153,0.4)',
+              }}
+            >
+              VIEW PRODUCTS
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
+            </a>
+            <a
+              href="#process"
+              className="px-8 py-4 rounded-xl border font-raj font-bold text-lg tracking-wide text-purple-300 hover:text-white hover:border-pink-500/50 transition-all"
+              style={{ borderColor: 'var(--cp-border)' }}
+            >
+              HOW IT WORKS
+            </a>
+          </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-dim">
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-success" /> Fixed-price scope
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-success" /> Stripe-powered billing
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-success" /> Self-host or managed
-              </span>
+          {/* Trust strip */}
+          <div className="flex flex-wrap gap-6 font-jb text-xs text-purple-400/60">
+            <span>● Since 2019</span>
+            <span>● 32+ Projects Shipped</span>
+            <span>● Stripe-integrated</span>
+            <span>● 99.9% Uptime</span>
+          </div>
+        </div>
+
+        {/* RIGHT: Floating product cards (cyberpunk card-game style) */}
+        <div className="relative hidden lg:block">
+          {/* Background hex glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px]"
+            style={{
+              background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 60%)',
+            }}
+          />
+
+          {/* Card 1 - KAIO'S CARDS (front, biggest) */}
+          <div className="relative z-30 w-[280px] mx-auto" style={{
+            animation: 'hex-drift 6s ease-in-out infinite',
+          }}>
+            <div className="rounded-2xl border p-5 backdrop-blur-sm neon-border" style={{
+              background: 'linear-gradient(160deg, rgba(236,72,153,0.15), rgba(168,85,247,0.1))',
+              borderColor: 'rgba(236,72,153,0.3)',
+            }}>
+              {/* Card header */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Gamepad2 className="w-5 h-5 text-pink-400"/>
+                  <span className="font-cyber text-xs tracking-wider text-pink-300">KAIO&apos;S CARDS</span>
+                </div>
+                <span className="font-jb text-[10px] text-purple-500">LIVE</span>
+              </div>
+
+              {/* Product visual */}
+              <div className="rounded-xl p-4 mb-4" style={{
+                background: 'rgba(10,5,20,0.6)',
+                border: '1px solid rgba(168,85,247,0.1)',
+              }}>
+                <div className="font-cyber text-xs text-purple-400 mb-2">CHARIZARD EX</div>
+                <div className="font-cyber text-2xl text-white mb-1">$619.22</div>
+                <div className="flex items-center gap-2">
+                  <Activity className="w-3 h-3 text-green-400"/>
+                  <span className="font-jb text-xs text-green-400">+12.4%</span>
+                </div>
+              </div>
+
+              {/* Card stats */}
+              <div className="grid grid-cols-3 gap-2">
+                <div className="text-center">
+                  <div className="font-cyber text-sm text-white">15K</div>
+                  <div className="font-jb text-[10px] text-purple-500">CARDS</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-cyber text-sm text-white">5min</div>
+                  <div className="font-jb text-[10px] text-purple-500">SCAN</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-cyber text-sm text-white">24/7</div>
+                  <div className="font-jb text-[10px] text-purple-500">LIVE</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* ── Visual (5 cols) ── */}
-          <div className="lg:col-span-5">
-            <CommandCenter />
+          {/* Card 2 - APEX TRADING (behind left) */}
+          <div className="absolute top-8 -left-4 z-20 w-[200px] opacity-60 rotate-[-6deg]" style={{
+            animation: 'hex-drift 7s ease-in-out infinite',
+            animationDelay: '1s',
+          }}>
+            <div className="rounded-xl border p-4" style={{
+              background: 'linear-gradient(160deg, rgba(168,85,247,0.12), rgba(124,58,237,0.08))',
+              borderColor: 'rgba(168,85,247,0.2)',
+            }}>
+              <div className="flex items-center gap-2 mb-3">
+                <LineChart className="w-4 h-4 text-purple-400"/>
+                <span className="font-cyber text-[10px] tracking-wider text-purple-300">APEX TRADING</span>
+              </div>
+              <div className="space-y-2">
+                <div className="h-2 rounded-full bg-purple-500/20"><div className="h-full w-3/4 rounded-full bg-purple-500/60"/></div>
+                <div className="h-2 rounded-full bg-pink-500/20"><div className="h-full w-1/2 rounded-full bg-pink-500/60"/></div>
+                <div className="h-2 rounded-full bg-purple-500/20"><div className="h-full w-5/6 rounded-full bg-purple-500/60"/></div>
+              </div>
+              <div className="font-jb text-[10px] text-purple-500 mt-3">SOLANA · PORT 4004</div>
+            </div>
+          </div>
+
+          {/* Card 3 - NEXUS AI (behind right) */}
+          <div className="absolute top-16 -right-4 z-10 w-[200px] opacity-50 rotate-[4deg]" style={{
+            animation: 'hex-drift 9s ease-in-out infinite',
+            animationDelay: '2s',
+          }}>
+            <div className="rounded-xl border p-4" style={{
+              background: 'linear-gradient(160deg, rgba(217,70,239,0.12), rgba(168,85,247,0.08))',
+              borderColor: 'rgba(217,70,239,0.2)',
+            }}>
+              <div className="flex items-center gap-2 mb-3">
+                <Bot className="w-4 h-4 text-fuchsia-400"/>
+                <span className="font-cyber text-[10px] tracking-wider text-fuchsia-300">NEXUS AI</span>
+              </div>
+              <div className="font-jb text-xs text-white mb-2">3 Tiers Live</div>
+              <div className="flex gap-2">
+                <span className="px-2 py-1 rounded text-[9px] font-jb bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30">$29</span>
+                <span className="px-2 py-1 rounded text-[9px] font-jb bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30">$99</span>
+                <span className="px-2 py-1 rounded text-[9px] font-jb bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30">$299</span>
+              </div>
+              <div className="font-jb text-[10px] text-purple-500 mt-3">STRIPE ● SOL</div>
+            </div>
           </div>
         </div>
       </div>
@@ -119,157 +353,53 @@ function Hero() {
   );
 }
 
-/* The floating "live" mock dashboard. CSS-only, no images. */
-function CommandCenter() {
+/* ═══════════════════════════════════════════════════════════════
+   3. TECH STRIP
+═══════════════════════════════════════════════════════════════ */
+function TechStrip() {
+  const techs = ['Next.js 15', 'TypeScript', 'Prisma', 'SQLite', 'Docker', 'Stripe', 'Solana'];
   return (
-    <div className="relative">
-      {/* Glow behind */}
-      <div aria-hidden className="absolute inset-0 -z-10 translate-y-6 scale-95 bg-gradient-to-br from-accent/20 via-accent2/10 to-transparent blur-3xl" />
-
-      <div className="card relative overflow-hidden rounded-3xl">
-        {/* Top bar */}
-        <div className="flex items-center justify-between border-b border-line/60 px-5 py-3.5">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-danger/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-accent3/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
-            <span className="ml-3 font-mono text-[11px] text-dim">~/k187/command-center</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="live-dot" />
-            <span className="font-mono text-[11px] text-dim">live</span>
-          </div>
-        </div>
-
-        {/* Status header */}
-        <div className="border-b border-line/40 px-5 py-4">
-          <div className="mono-tag">system status</div>
-          <div className="mt-2 flex items-baseline justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-semibold tracking-tight">All systems</span>
-              <span className="text-2xl font-semibold text-success">operational</span>
-            </div>
-            <span className="font-mono text-[11px] text-dim">99.97% / 30d</span>
-          </div>
-        </div>
-
-        {/* Mini metrics */}
-        <div className="grid grid-cols-3 border-b border-line/40">
-          {[
-            { k: 'agents',    v: '12',   d: '↑ 3 this week' },
-            { k: 'trades',    v: '1,284', d: '24h volume' },
-            { k: 'uptime',    v: '45d',   d: 'no incidents' },
-          ].map((m, i) => (
-            <div
-              key={m.k}
-              className={`px-4 py-4 ${i < 2 ? 'border-r border-line/40' : ''}`}
-            >
-              <div className="mono-tag">{m.k}</div>
-              <div className="mt-1 font-display text-2xl font-medium tracking-tight">
-                {m.v}
-              </div>
-              <div className="font-mono text-[10px] text-dim">{m.d}</div>
+    <section className="py-12 border-y" style={{
+      background: 'rgba(15,8,30,0.5)',
+      borderColor: 'var(--cp-border)',
+    }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
+          <span className="font-jb text-xs text-purple-500 uppercase tracking-widest">Built with</span>
+          {techs.map(t => (
+            <div key={t} className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-pink-500/60"/>
+              <span className="font-raj text-sm text-purple-300/70">{t}</span>
             </div>
           ))}
         </div>
-
-        {/* Recent activity feed */}
-        <div className="px-5 py-4">
-          <div className="mono-tag mb-3">recent activity</div>
-          <ul className="space-y-2.5 font-mono text-[12px]">
-            {[
-              { t: '13:42:01', a: 'meme-agent',  msg: 'launched $KEK on pump.fun',        lvl: 'success' },
-              { t: '13:38:55', a: 'trading-bot', msg: 'closed long SOL/USDC +4.2%',        lvl: 'success' },
-              { t: '13:31:12', a: 'monitor',     msg: 'flagged volume spike on $WIF',     lvl: 'warn' },
-              { t: '13:24:47', a: 'trading-bot', msg: 'opened long ETH/USDC',              lvl: 'info' },
-              { t: '13:18:09', a: 'meme-agent',  msg: 'rewrote token metadata, deploying', lvl: 'info' },
-            ].map((row) => (
-              <li key={row.t} className="flex items-start gap-3">
-                <span className="shrink-0 text-dim">{row.t}</span>
-                <span
-                  className={
-                    row.lvl === 'success' ? 'text-success' :
-                    row.lvl === 'warn'    ? 'text-accent3' :
-                                            'text-accent2'
-                  }
-                >
-                  ●
-                </span>
-                <span className="shrink-0 text-accent">{row.a}</span>
-                <span className="truncate text-fg/80">{row.msg}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Floating badge — bento depth */}
-      <div
-        className="absolute -left-6 -bottom-6 hidden rotate-[-4deg] rounded-xl border border-line bg-surface/90 p-3 backdrop-blur-md md:block animate-drift"
-        style={{ animationDuration: '6s' }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent/20 text-accent">
-            <Zap className="h-3.5 w-3.5" />
-          </span>
-          <div className="leading-tight">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-dim">profit 24h</div>
-            <div className="font-display text-sm font-medium text-success">+ $1,247.83</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ── 2. Logo / "built with" strip ──────────────────────────────── */
-
-function LogoStrip() {
-  return (
-    <section className="border-y border-line/40 bg-surface/30 py-10">
-      <div className="container-page">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-          <div className="mono-tag shrink-0">built with</div>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm text-dim">
-            {[
-              { i: Cpu,        k: 'Next.js 15' },
-              { i: Layers,     k: 'TypeScript' },
-              { i: Code2,      k: 'PostgreSQL' },
-              { i: GitBranch,  k: 'GitHub Actions' },
-              { i: Terminal,   k: 'Node 22' },
-              { i: Globe,      k: 'Vultr + Cloudflare' },
-            ].map(({ i: Icon, k }) => (
-              <span key={k} className="flex items-center gap-1.5 transition hover:text-fg">
-                <Icon className="h-3.5 w-3.5" /> {k}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 }
 
-/* ── 3. Stats row ──────────────────────────────────────────────── */
-
+/* ═══════════════════════════════════════════════════════════════
+   4. STATS ROW
+═══════════════════════════════════════════════════════════════ */
 function StatsRow() {
   const stats = [
-    { v: '32',  k: 'Projects indexed',      d: 'in our build registry' },
-    { v: '6/6', k: 'Validation gate',        d: 'lint · typecheck · test · build · lint · ship' },
-    { v: '45d', k: 'Median deploy',          d: 'from kickoff to production' },
-    { v: '0',   k: 'Secret leaks',           d: 'enforced in code, not docs' },
+    { value: '32+', label: 'Projects', icon: Cpu },
+    { value: '6', label: 'Live Products', icon: Rocket },
+    { value: '45d+', label: 'Avg Uptime', icon: Clock },
+    { value: '0', label: 'Secret Leaks', icon: ShieldCheck },
   ];
   return (
-    <section className="section-tight">
-      <div className="container-page">
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.k} className="bg-ink p-7 text-center sm:text-left">
-              <div className="font-display text-5xl font-medium tracking-tight text-fg">
-                {s.v}
+    <section className="py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((s, i) => (
+            <div key={i} className="text-center cyber-card" style={{ animationDelay: `${i * 100}ms` }}>
+              <s.icon className="w-6 h-6 mx-auto mb-3 text-pink-500/60"/>
+              <div className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-transparent bg-clip-text mb-2"
+                style={{ backgroundImage: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>
+                {s.value}
               </div>
-              <div className="mt-2 text-sm font-semibold text-fg">{s.k}</div>
-              <div className="mt-1 text-xs text-dim">{s.d}</div>
+              <div className="font-raj text-sm text-purple-300/70 tracking-wide">{s.label}</div>
             </div>
           ))}
         </div>
@@ -278,480 +408,445 @@ function StatsRow() {
   );
 }
 
-/* ── 4. Services (bento grid) ──────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   5. PORTFOLIO GRID — All products organized
+═══════════════════════════════════════════════════════════════ */
+function PortfolioGrid() {
+  const products = [
+    {
+      title: "KAIO'S CARDS",
+      cat: 'COLLECTIBLES',
+      desc: 'Pokémon TCG price lookup & trade analyzer. 15K+ cards indexed with real-time TCGplayer + Cardmarket data. Free to use.',
+      status: 'LIVE',
+      url: 'https://cards.123automateme.com',
+      icon: Gamepad2,
+      color: '#ec4899',
+      tags: ['Free', 'API', 'Scanner'],
+    },
+    {
+      title: 'APEX TRADING BOT',
+      cat: 'FINTECH',
+      desc: 'Solana trading analytics & execution platform. WebSocket data feeds, real-time market analysis, automated strategies.',
+      status: 'LIVE',
+      url: 'https://app.vivalarassa.fun',
+      icon: LineChart,
+      color: '#a855f7',
+      tags: ['Solana', 'Real-time', 'WebSocket'],
+    },
+    {
+      title: 'APEX RESEARCH BOT',
+      cat: 'FINTECH',
+      desc: 'AI-powered crypto research assistant. Stripe-gated access: $9 single query, $29/mo subscription. 6 active users.',
+      status: 'EARNING',
+      url: '#',
+      icon: Bot,
+      color: '#d946ef',
+      tags: ['Stripe', 'AI', 'Subscription'],
+    },
+    {
+      title: 'NEXUS AI',
+      cat: 'AI AGENT',
+      desc: 'Multi-tier AI trading hub. Starter/Pro/Elite subscriptions via Stripe + SOL payments. Community dashboard.',
+      status: 'EARNING',
+      url: 'https://nexus.vivalarassa.fun',
+      icon: Cpu,
+      color: '#7c3aed',
+      tags: ['3 Tiers', 'Stripe', 'SOL'],
+    },
+    {
+      title: 'SOLANA ANALYTICS',
+      cat: 'RESEARCH',
+      desc: 'Read-only Solana blockchain research tool. Bonding curve analysis, wallet tracking, pool scanning, market insights.',
+      status: 'LIVE',
+      url: '#',
+      icon: Activity,
+      color: '#ec4899',
+      tags: ['Read-only', 'On-chain', 'CLI'],
+    },
+    {
+      title: 'DESIGN WITH HERMES',
+      cat: 'AGENCY',
+      desc: 'Full-stack web design & development consultancy. Landing pages, SaaS products, custom automation. Client-facing brand.',
+      status: 'LIVE',
+      url: '/designwithhermes',
+      icon: Sparkles,
+      color: '#a855f7',
+      tags: ['Consulting', 'Next.js', 'Design'],
+    },
+  ];
 
-function Services() {
   return (
-    <section id="services" className="section">
-      <div className="container-page">
-        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <div className="eyebrow">What we do</div>
-            <h2 className="h-section">Three ways we can work together.</h2>
+    <section id="portfolio" className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6" style={{
+            background: 'rgba(236,72,153,0.08)',
+            borderColor: 'rgba(236,72,153,0.2)',
+          }}>
+            <Gamepad2 className="w-4 h-4 text-pink-400"/>
+            <span className="font-jb text-xs text-pink-300 tracking-wide">PORTFOLIO</span>
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-muted">
-            Every engagement starts with a free 30-minute call. We scope,
-            price, and ship — no retainers unless you want one.
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            PRODUCTS & PROJECTS
+          </h2>
+          <p className="font-raj text-xl text-purple-300/60 max-w-2xl mx-auto">
+            Six live products. Built, deployed, and maintained by a solo developer.
           </p>
         </div>
 
-        {/* ── Bento grid: 1 large (col-span 7) + 2 stacked (col-span 5) ── */}
-        <div className="grid gap-5 lg:grid-cols-12">
-          {/* Featured tier */}
-          <article className="card card-hover relative col-span-1 overflow-hidden p-8 lg:col-span-7 lg:p-10">
-            <div aria-hidden className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl" />
-            <div className="relative flex h-full flex-col">
-              <div className="flex items-center gap-2">
-                <span className="pill border-accent/30 bg-accent/10 text-accent">
-                  <Sparkles className="h-3 w-3" /> Most popular
+        {/* Product cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((p, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 cyber-card"
+              style={{
+                background: 'var(--cp-bg-card)',
+                borderColor: 'var(--cp-border)',
+                animationDelay: `${i * 80}ms`,
+              }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(236,72,153,0.4)')}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--cp-border)')}
+            >
+              {/* Status badge */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-jb text-[10px] text-purple-500 tracking-widest uppercase">{p.cat}</span>
+                <span className={`px-2 py-1 rounded-full text-[10px] font-jb border ${
+                  p.status === 'EARNING'
+                    ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                    : 'bg-purple-500/10 text-purple-400 border-purple-500/30'
+                }`}>
+                  {p.status}
                 </span>
               </div>
-              <div className="mt-6 flex items-baseline gap-3">
-                <h3 className="h-card text-3xl">Commission a build</h3>
-                <span className="font-mono text-sm text-accent">from $2,000</span>
-              </div>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
-                Tell us the workflow you want automated. We scope, build, and
-                ship a production system — fixed price, fixed timeline, 30
-                days of support included.
-              </p>
 
-              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-fg/90">
-                {[
-                  ['Custom AI agent', Wrench],
-                  ['Trading bot',     LineChart],
-                  ['Token launcher',  Rocket],
-                  ['Workflow auto',   Workflow],
-                  ['Payments integ',  Bot],
-                  ['Source code',     Code2],
-                ].map(([label, Icon]) => {
-                  const I = Icon as any;
-                  return (
-                    <div key={label as string} className="flex items-center gap-2">
-                      <I className="h-4 w-4 text-accent" />
-                      <span>{label as string}</span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-auto pt-8">
-                <Link href="#contact" className="btn-accent">
-                  Request a build <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </article>
-
-          {/* Tier 1 */}
-          <article className="card card-hover col-span-1 flex flex-col p-8 lg:col-span-5">
-            <div className="flex items-center gap-2">
-              <span className="pill">Subscribe</span>
-            </div>
-            <h3 className="h-card mt-6 text-2xl">Buy a product</h3>
-            <div className="mt-1 font-mono text-sm text-accent2">from $19/mo</div>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Subscribe to one of our turnkey SaaS products. Cancel anytime,
-              no setup fees, no minimums.
-            </p>
-            <ul className="mt-5 space-y-2 text-sm text-fg/90">
-              <li className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 text-accent2" /> MetaLaunch AI
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 text-accent2" /> K187 Bot Fleet
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 text-accent2" /> Hosted dashboards
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 text-accent2" /> Stripe billing
-              </li>
-            </ul>
-            <Link href="#products" className="btn-ghost mt-6 self-start">
-              See products <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </article>
-
-          {/* Tier 2 — full width below */}
-          <article className="card card-hover col-span-1 flex flex-col p-8 sm:col-span-2 lg:col-span-12 lg:flex-row lg:items-center lg:gap-12">
-            <div className="flex-1">
-              <div className="pill">Retainer</div>
-              <h3 className="h-card mt-4 text-2xl">Ongoing engineering partnership</h3>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-                Bring us into your team for architecture review, audits, and
-                ongoing engineering. Hourly rate, monthly cap, no surprises.
-              </p>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-3 lg:mt-0">
-              <Stat label="Rate" value="$300 / hr" />
-              <Stat label="Response" value="< 4h" />
-              <Stat label="Min. commit" value="4 hr / mo" />
-            </div>
-            <Link href="#contact" className="btn-ghost mt-6 self-start lg:mt-0">
-              Book a call
-            </Link>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="mono-tag">{label}</div>
-      <div className="font-display text-xl font-medium">{value}</div>
-    </div>
-  );
-}
-
-/* ── 5. Process (zig-zag) ──────────────────────────────────────── */
-
-function Process() {
-  const steps = [
-    {
-      n: '01',
-      t: 'Discovery',
-      d: 'A 30-minute call to understand the workflow you want automated, the systems in play, and what success looks like. We come prepared; you leave with a one-page summary.',
-      bullets: ['No slide decks', 'No NDA required for first call', 'Outcome: clear problem statement'],
-    },
-    {
-      n: '02',
-      t: 'Proposal',
-      d: 'Within 2 business days you get a fixed-price proposal: scope, deliverables, timeline, and acceptance criteria. We sign before any code is written.',
-      bullets: ['Fixed price', 'Fixed timeline', 'Acceptance criteria defined up front'],
-    },
-    {
-      n: '03',
-      t: 'Build',
-      d: 'Weekly demos. Working software from week one. You see the system come alive, give feedback, and we adjust. By week 4 you have a real thing.',
-      bullets: ['Weekly demo', 'Working software always', 'Direct Slack channel to the builder'],
-    },
-    {
-      n: '04',
-      t: 'Launch & support',
-      d: 'Deployed to your infrastructure (or ours), with monitoring, runbooks, and 30 days of bug-fix support. After that, optional retainer.',
-      bullets: ['Deployed to your infra', '30 days bug-fix support', 'Optional retainer afterwards'],
-    },
-  ];
-  return (
-    <section id="process" className="section border-t border-line/40 bg-surface/20">
-      <div className="container-page">
-        <div className="mb-16 max-w-2xl">
-          <div className="eyebrow">How it works</div>
-          <h2 className="h-section">From idea to live system in weeks, not months.</h2>
-        </div>
-
-        <ol className="space-y-20 lg:space-y-28">
-          {steps.map((s, i) => {
-            const flip = i % 2 === 1; // zig-zag
-            return (
-              <li key={s.n} className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-                {/* Text */}
-                <div className={`lg:col-span-5 ${flip ? 'lg:order-2 lg:col-start-8' : ''}`}>
-                  <div className="font-mono text-xs text-dim">Step {s.n}</div>
-                  <h3 className="h-section mt-2 text-3xl sm:text-4xl">{s.t}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-muted">
-                    {s.d}
-                  </p>
-                  <ul className="mt-5 space-y-2 text-sm text-fg/85">
-                    {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2">
-                        <ChevronRight className="mt-0.5 h-4 w-4 text-accent" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+              {/* Icon + Title */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: `${p.color}15`,
+                  border: `1px solid ${p.color}30`,
+                }}>
+                  <p.icon className="w-5 h-5" style={{ color: p.color }}/>
                 </div>
-
-                {/* Visual */}
-                <div className={`lg:col-span-7 ${flip ? 'lg:order-1 lg:col-start-1' : ''}`}>
-                  <ProcessVisual index={i} />
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function ProcessVisual({ index }: { index: number }) {
-  // Three distinct visuals for the four steps (last one reuses the third)
-  if (index === 0) {
-    return (
-      <div className="card overflow-hidden p-6 sm:p-8">
-        <div className="mono-tag">// discovery</div>
-        <div className="mt-4 space-y-3 font-mono text-sm">
-          {[
-            ['Q', 'What workflow do you want automated?'],
-            ['A', 'Crypto trading. Trend detection → token deploy → exit.'],
-            ['Q', 'What does success look like in 90 days?'],
-            ['A', '$5k MRR from Pro tier subscribers.'],
-            ['Q', 'Who else has tried this for you?'],
-            ['A', 'No one. We want to build from scratch.'],
-          ].map(([k, v], i) => (
-            <div key={i} className="flex gap-3">
-              <span className={k === 'Q' ? 'text-accent2' : 'text-accent'}>{k}</span>
-              <span className="text-fg/80">{v}</span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 flex items-center gap-2 border-t border-line/40 pt-4 font-mono text-[11px] text-dim">
-          <Clock className="h-3 w-3" /> 30 minutes, no NDA
-        </div>
-      </div>
-    );
-  }
-  if (index === 1) {
-    return (
-      <div className="card overflow-hidden p-6 sm:p-8">
-        <div className="flex items-center justify-between">
-          <div className="mono-tag">// proposal · v1</div>
-          <span className="pill">signed</span>
-        </div>
-        <h4 className="mt-4 text-xl font-semibold">MetaLaunch AI — MVP build</h4>
-        <div className="mt-5 grid grid-cols-3 gap-4">
-          <MiniStat label="scope" value="6 deliverables" />
-          <MiniStat label="price" value="$8,400" />
-          <MiniStat label="timeline" value="4 weeks" />
-        </div>
-        <ul className="mt-5 space-y-1.5 font-mono text-sm text-fg/80">
-          {['Trend detection engine', 'Token metadata AI', 'Pump.fun deploy', 'Stripe billing', 'Operator dashboard', 'Runbook + handover'].map((d) => (
-            <li key={d} className="flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-success" /> {d}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-  if (index === 2) {
-    return (
-      <div className="card overflow-hidden p-6 sm:p-8">
-        <div className="mono-tag">// weekly demo</div>
-        <div className="mt-4 grid grid-cols-7 items-end gap-2" style={{ height: 160 }}>
-          {[40, 55, 50, 70, 60, 85, 95].map((h, i) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div
-                className="w-full rounded-t bg-gradient-to-t from-accent/60 to-accent"
-                style={{ height: `${h}%` }}
-              />
-              <div className="font-mono text-[10px] text-dim">w{i + 1}</div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-5 flex items-center justify-between text-sm">
-          <div>
-            <div className="text-fg">Working software, every Friday</div>
-            <div className="text-xs text-dim">demoed live · feedback in writing</div>
-          </div>
-          <span className="pill">
-            <Activity className="h-3 w-3" /> week 4 of 4
-          </span>
-        </div>
-      </div>
-    );
-  }
-  // index 3 — Launch
-  return (
-    <div className="card relative overflow-hidden p-6 sm:p-8">
-      <div className="mono-tag">// launch</div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        {[
-          ['Deployed',      'prod.k187.io',     'success'],
-          ['Monitoring',    'UptimeRobot',       'success'],
-          ['Stripe live',   'Checkout + webhook','success'],
-          ['Runbook',       '30 pages, you own it','success'],
-        ].map(([k, v, lvl]) => (
-          <div key={k} className="flex items-center justify-between rounded-lg border border-line/60 bg-surface/60 px-4 py-3">
-            <div>
-              <div className="mono-tag">{k}</div>
-              <div className="font-mono text-sm text-fg">{v}</div>
-            </div>
-            <ShieldCheck className="h-5 w-5 text-success" />
-          </div>
-        ))}
-      </div>
-      <div className="mt-5 rounded-lg border border-success/30 bg-success/5 p-4 text-sm">
-        <div className="flex items-center gap-2 font-semibold text-success">
-          <ShieldCheck className="h-4 w-4" /> Shipped on time, on budget
-        </div>
-        <div className="mt-1 text-fg/70">30 days of bug-fix support included. Optional retainer after.</div>
-      </div>
-    </div>
-  );
-}
-
-function MiniStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="mono-tag">{label}</div>
-      <div className="font-display text-lg font-medium">{value}</div>
-    </div>
-  );
-}
-
-/* ── 6. Featured product (MetaLaunch AI) ───────────────────────── */
-
-function FeaturedProduct() {
-  return (
-    <section id="products" className="section">
-      <div className="container-page">
-        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
-          {/* Card */}
-          <div className="lg:col-span-5">
-            <div className="eyebrow"><Rocket className="h-3 w-3" /> Featured product</div>
-            <h2 className="h-section mt-3">MetaLaunch AI</h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted">
-              An autonomous meme-coin launch platform on Solana. Detects
-              viral trends across X, TikTok, and Reddit, generates token
-              metadata with AI, and deploys to Pump.fun in one click.
-            </p>
-            <ul className="mt-6 space-y-2 text-sm text-fg/90">
-              {[
-                'Trend detection across X, TikTok, Reddit',
-                'AI-generated token name, symbol, description, logo',
-                'One-click deploy to Pump.fun (or fully auto)',
-                'Two modes: manual control, or auto-launch on threshold',
-                'Per-user quotas + Stripe-billed subscriptions',
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-2">
-                  <Check className="mt-0.5 h-4 w-4 text-success" /> {b}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link href="#contact" className="btn-accent">
-                Join the waitlist <ArrowRight className="h-4 w-4" />
-              </Link>
-              <span className="pill">Beta · invite only</span>
-            </div>
-          </div>
-
-          {/* Mock UI */}
-          <div className="lg:col-span-7">
-            <div className="card relative overflow-hidden p-1.5">
-              {/* Browser chrome */}
-              <div className="flex items-center gap-2 border-b border-line/60 px-4 py-2.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-danger/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-accent3/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
-                <div className="ml-3 flex-1 rounded-md border border-line bg-surface/40 px-3 py-1 font-mono text-[11px] text-dim">
-                  metalaunch.ai/trends
-                </div>
+                <h3 className="font-cyber text-sm font-bold tracking-wide text-white">{p.title}</h3>
               </div>
 
-              <div className="grid grid-cols-12 divide-x divide-line/40">
-                {/* Trend list */}
-                <div className="col-span-7 p-5">
-                  <div className="mono-tag mb-3">// trending now</div>
-                  <ul className="space-y-2.5">
-                    {[
-                      { tag: '$GIGACHAD', score: 92, vol: '+340%' },
-                      { tag: '$WIFHAT',   score: 87, vol: '+212%' },
-                      { tag: '$SLERF',    score: 78, vol: '+118%' },
-                      { tag: '$BOME',     score: 71, vol: '+88%'  },
-                      { tag: '$TRUMP',    score: 64, vol: '+52%'  },
-                    ].map((t, i) => (
-                      <li
-                        key={t.tag}
-                        className="flex items-center justify-between rounded-lg border border-line/40 bg-surface/30 px-3 py-2.5"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-[10px] text-dim">{i + 1}</span>
-                          <span className="font-mono text-sm font-semibold text-fg">{t.tag}</span>
-                        </div>
-                        <div className="flex items-center gap-4 font-mono text-[11px]">
-                          <span className="text-accent2">score {t.score}</span>
-                          <span className="text-success">{t.vol}</span>
-                          <button className="rounded-md border border-accent/30 bg-accent/10 px-2 py-1 text-accent">
-                            launch →
-                          </button>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* Token preview */}
-                <div className="col-span-5 p-5">
-                  <div className="mono-tag mb-3">// preview</div>
-                  <div className="rounded-lg border border-accent/30 bg-accent/5 p-4">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-12 w-12 place-items-center rounded-lg bg-gradient-to-br from-accent to-accent2 text-ink font-display text-xl font-bold">
-                        G
-                      </div>
-                      <div>
-                        <div className="font-mono text-sm font-semibold">$GIGACHAD</div>
-                        <div className="font-mono text-[11px] text-dim">pump.fun · solana</div>
-                      </div>
-                    </div>
-                    <p className="mt-3 text-xs leading-relaxed text-fg/75">
-                      The most based meme token on Solana. 1B supply, 0% tax,
-                      locked liquidity, community-driven.
-                    </p>
-                    <div className="mt-4 space-y-1.5 font-mono text-[11px]">
-                      <div className="flex justify-between"><span className="text-dim">fee</span><span>0.5 SOL</span></div>
-                      <div className="flex justify-between"><span className="text-dim">auto-buy</span><span>0.1 SOL</span></div>
-                      <div className="flex justify-between"><span className="text-dim">slippage</span><span>3%</span></div>
-                    </div>
-                    <button className="mt-4 w-full rounded-md bg-accent py-2 text-xs font-semibold text-ink">
-                      Deploy to Pump.fun
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+              {/* Description */}
+              <p className="font-raj text-sm text-purple-300/60 leading-relaxed mb-5">{p.desc}</p>
 
-/* ── 7. Secondary product (K187 Bot Store) ─────────────────────── */
-
-function SecondaryProduct() {
-  return (
-    <section className="section-tight">
-      <div className="container-page">
-        <div className="card relative overflow-hidden p-8 sm:p-10">
-          <div aria-hidden className="absolute inset-0 grid-bg opacity-30" />
-          <div className="relative grid items-center gap-8 sm:grid-cols-12">
-            <div className="sm:col-span-7">
-              <div className="flex items-center gap-2">
-                <span className="pill"><Bot className="h-3 w-3" /> Live</span>
-                <span className="mono-tag">k187 bot store</span>
-              </div>
-              <h3 className="h-card mt-4 text-2xl sm:text-3xl">
-                Algorithmic trading bots, by subscription
-              </h3>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-                Cyberpunk-styled storefront for the K187 trading bot fleet.
-                Bots for memecoin sniping, US30 scalping, and DEX arbitrage.
-                Stripe-powered subscriptions, paper-trading by default.
-              </p>
-              <Link href="#contact" className="btn-ghost mt-6 inline-flex">
-                Browse the store <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="sm:col-span-5">
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { n: 'Meme sniping', v: '0.4s' },
-                  { n: 'US30 scalper', v: '12ms' },
-                  { n: 'DEX arbitrage', v: '4 chains' },
-                  { n: 'Portfolio rebal', v: 'weekly' },
-                ].map((b) => (
-                  <div key={b.n} className="rounded-lg border border-line/60 bg-surface/60 p-4">
-                    <div className="mono-tag">{b.n}</div>
-                    <div className="font-display text-xl font-medium">{b.v}</div>
-                  </div>
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {p.tags.map(tag => (
+                  <span key={tag} className="px-2 py-1 rounded-md font-jb text-[10px] border"
+                    style={{
+                      background: 'rgba(168,85,247,0.06)',
+                      borderColor: 'rgba(168,85,247,0.15)',
+                      color: 'rgba(192,132,252,0.7)',
+                    }}>
+                    {tag}
+                  </span>
                 ))}
               </div>
+
+              {/* Link */}
+              {p.url !== '#' && (
+                <a href={p.url} target={p.url.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-raj text-sm text-pink-400 hover:text-pink-300 transition-colors group/link">
+                  Explore
+                  <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform"/>
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. PROCESS — zig-zag
+═══════════════════════════════════════════════════════════════ */
+function ProcessSection() {
+  const steps = [
+    {
+      step: '01', title: 'DISCOVERY',
+      desc: 'We map your workflow, identify automation opportunities, and scope the build. No vague promises — just concrete deliverables.',
+      visual: (
+        <div className="space-y-3">
+          {['Stakeholder interview', 'Workflow mapping', 'Scope document', 'Timeline + milestones'].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 px-4 py-2 rounded-lg" style={{
+              background: i === 1 ? 'rgba(236,72,153,0.08)' : 'rgba(15,8,30,0.5)',
+              border: `1px solid ${i === 1 ? 'rgba(236,72,153,0.3)' : 'var(--cp-border)'}`,
+            }}>
+              <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-pink-500' : 'bg-purple-500/40'}`}/>
+              <span className="font-raj text-sm text-purple-200/70">{item}</span>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      step: '02', title: 'BUILD',
+      desc: 'Sprint-based development. Next.js frontend, Prisma database, Docker infrastructure. Every line tested, every deploy validated.',
+      visual: (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="font-jb text-[10px] text-purple-500">BUILD PIPELINE</span>
+          </div>
+          {['pnpm install ✓', 'prisma db:push ✓', 'next build ✓', 'docker build ✓'].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg" style={{
+              background: 'rgba(15,8,30,0.5)', border: '1px solid var(--cp-border)',
+            }}>
+              <Check className="w-3 h-3 text-green-400"/>
+              <span className="font-jb text-xs text-purple-200/60">{item}</span>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      step: '03', title: 'DEPLOY',
+      desc: 'Push to production on your VPS. SSL certificates, DNS, nginx reverse proxy, health checks — all automated and verified.',
+      visual: (
+        <div className="space-y-3">
+          <div className="px-4 py-3 rounded-lg flex items-center gap-3" style={{
+            background: 'rgba(15,8,30,0.5)', border: '1px solid var(--cp-border)',
+          }}>
+            <Globe className="w-4 h-4 text-pink-400"/>
+            <div>
+              <div className="font-jb text-xs text-white">https://yourapp.com</div>
+              <div className="font-jb text-[10px] text-green-400">HTTP/2 200 · SSL verified</div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="px-3 py-2 rounded-lg text-center" style={{
+              background: 'rgba(236,72,153,0.08)', border: '1px solid rgba(236,72,153,0.2)',
+            }}>
+              <div className="font-cyber text-sm text-white">99.9%</div>
+              <div className="font-jb text-[10px] text-purple-500">UPTIME</div>
+            </div>
+            <div className="px-3 py-2 rounded-lg text-center" style={{
+              background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)',
+            }}>
+              <div className="font-cyber text-sm text-white">{'<100ms'}</div>
+              <div className="font-jb text-[10px] text-purple-500">LATENCY</div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      step: '04', title: 'MONETIZE',
+      desc: 'Integrate Stripe payments, set up subscription tiers, configure webhooks. Your product starts earning from day one.',
+      visual: (
+        <div className="space-y-3">
+          <div className="px-4 py-3 rounded-lg" style={{
+            background: 'rgba(15,8,30,0.5)', border: '1px solid var(--cp-border)',
+          }}>
+            <div className="font-jb text-[10px] text-purple-500 mb-2">STRIPE CHECKOUT</div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center">
+                <Zap className="w-4 h-4 text-green-400"/>
+              </div>
+              <div>
+                <div className="font-raj text-sm text-white">Payment received</div>
+                <div className="font-jb text-xs text-green-400">$29.00 AUD · Monthly</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {['$9', '$29', '$299'].map((p, i) => (
+              <div key={i} className="px-3 py-2 rounded-lg text-center" style={{
+                background: 'rgba(236,72,153,0.06)', border: '1px solid rgba(236,72,153,0.15)',
+              }}>
+                <div className="font-cyber text-sm text-white">{p}</div>
+                <div className="font-jb text-[10px] text-purple-500">/mo</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <section id="process" className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6" style={{
+            background: 'rgba(168,85,247,0.08)',
+            borderColor: 'rgba(168,85,247,0.2)',
+          }}>
+            <Workflow className="w-4 h-4 text-purple-400"/>
+            <span className="font-jb text-xs text-purple-300 tracking-wide">PROCESS</span>
+          </div>
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            FROM IDEA TO INCOME
+          </h2>
+          <p className="font-raj text-xl text-purple-300/60 max-w-xl mx-auto">
+            Four steps. No bloated timelines. Ship fast, ship clean.
+          </p>
+        </div>
+
+        <div className="space-y-20">
+          {steps.map((s, i) => (
+            <div key={i} className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+              <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <span className="font-cyber text-3xl font-black text-transparent bg-clip-text"
+                    style={{ backgroundImage: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>
+                    {s.step}
+                  </span>
+                  <div className="w-12 h-px bg-gradient-to-r from-pink-500 to-transparent"/>
+                  <span className="font-cyber text-sm text-purple-400 tracking-widest">{s.title}</span>
+                </div>
+                <h3 className="font-cyber text-2xl font-bold tracking-tight text-white mb-4">{s.title}</h3>
+                <p className="font-raj text-lg text-purple-300/60 leading-relaxed">{s.desc}</p>
+              </div>
+              <div className={`rounded-2xl border p-6 ${i % 2 === 1 ? 'lg:col-start-1' : ''}`} style={{
+                background: 'var(--cp-bg-card)',
+                borderColor: 'var(--cp-border)',
+              }}>
+                {s.visual}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. FEATURED PRODUCT — KAIO'S CARDS
+═══════════════════════════════════════════════════════════════ */
+function FeaturedProduct() {
+  return (
+    <section id="products" className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Info */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{
+              background: 'rgba(236,72,153,0.08)',
+              borderColor: 'rgba(236,72,153,0.2)',
+            }}>
+              <Star className="w-4 h-4 text-pink-400"/>
+              <span className="font-jb text-xs text-pink-300 tracking-wide">FEATURED PRODUCT</span>
+            </div>
+
+            <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white">
+              KAIO&apos;S CARDS
+            </h2>
+            <p className="font-raj text-xl text-purple-300/60 leading-relaxed">
+              Free Pokémon TCG price lookup with real-time TCGplayer + Cardmarket data.
+              Search 15,000+ cards, scan booster packs, and analyze trades — all in your browser.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: 'Cards Indexed', value: '15,000+' },
+                { label: 'Price Sources', value: '2 (US + EU)' },
+                { label: 'Refresh Rate', value: 'Every 24h' },
+                { label: 'Account Needed', value: 'None (Free)' },
+              ].map((m, i) => (
+                <div key={i} className="rounded-xl border p-4" style={{
+                  background: 'rgba(15,8,30,0.5)',
+                  borderColor: 'var(--cp-border)',
+                }}>
+                  <div className="font-cyber text-lg text-white">{m.value}</div>
+                  <div className="font-jb text-[10px] text-purple-500 mt-1">{m.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex gap-4">
+              <a href="https://cards.123automateme.com" target="_blank" rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl font-raj font-bold tracking-wide text-white transition-all hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #ec4899, #d946ef)',
+                  boxShadow: '0 0 20px rgba(236,72,153,0.3)',
+                }}>
+                TRY IT FREE →
+              </a>
+              <a href="/kaios-cards" className="px-6 py-3 rounded-xl border font-raj font-bold tracking-wide text-purple-300 hover:text-white hover:border-pink-500/50 transition-all"
+                style={{ borderColor: 'var(--cp-border)' }}>
+                LEARN MORE
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Product mock */}
+          <div className="relative">
+            <div className="rounded-2xl border p-6 neon-border" style={{
+              background: 'var(--cp-bg-card)',
+              borderColor: 'rgba(236,72,153,0.3)',
+            }}>
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 mb-4 pb-4 border-b" style={{ borderColor: 'var(--cp-border)' }}>
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60"/>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60"/>
+                  <div className="w-3 h-3 rounded-full bg-green-500/60"/>
+                </div>
+                <div className="flex-1 px-3 py-1.5 rounded-lg font-jb text-[10px] text-purple-400" style={{
+                  background: 'rgba(10,5,20,0.5)',
+                }}>
+                  cards.123automateme.com
+                </div>
+              </div>
+
+              {/* Search */}
+              <div className="flex items-center gap-3 px-4 py-3 rounded-xl mb-4" style={{
+                background: 'rgba(10,5,20,0.5)',
+                border: '1px solid var(--cp-border)',
+              }}>
+                <span className="text-purple-400">⌕</span>
+                <span className="font-raj text-sm text-purple-200/60 flex-1">Charizard ex</span>
+                <kbd className="px-2 py-0.5 rounded font-jb text-[10px] text-purple-500" style={{
+                  background: 'rgba(15,8,30,0.8)',
+                }}>⌘K</kbd>
+              </div>
+
+              {/* Card result */}
+              <div className="rounded-xl p-4 mb-4" style={{
+                background: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(168,85,247,0.06))',
+                border: '1px solid rgba(236,72,153,0.2)',
+              }}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <div className="font-jb text-[10px] text-pink-400">sv6 · 006/165</div>
+                    <div className="font-cyber text-lg font-bold text-white">Charizard ex</div>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-lg" style={{
+                    background: 'rgba(236,72,153,0.1)',
+                    border: '1px solid rgba(236,72,153,0.3)',
+                  }}>
+                    <span className="font-cyber text-sm text-pink-300">$619.22</span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 pt-3 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+                  <div>
+                    <div className="font-jb text-[10px] text-purple-500">TCGplayer</div>
+                    <div className="font-raj text-lg font-semibold text-green-400">$619.22</div>
+                  </div>
+                  <div>
+                    <div className="font-jb text-[10px] text-purple-500">Cardmarket</div>
+                    <div className="font-raj text-lg font-semibold text-purple-400">€580.00</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trade analyzer preview */}
+              <div className="flex items-center gap-2 px-4 py-2 rounded-lg" style={{
+                background: 'rgba(16,185,129,0.08)',
+                border: '1px solid rgba(16,185,129,0.2)',
+              }}>
+                <Activity className="w-4 h-4 text-green-400"/>
+                <span className="font-jb text-xs text-green-400">+12.4% this month · Strong buy signal</span>
+              </div>
             </div>
           </div>
         </div>
@@ -760,216 +855,305 @@ function SecondaryProduct() {
   );
 }
 
-/* ── 8. Pull quote ─────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   8. SERVICES
+═══════════════════════════════════════════════════════════════ */
+function ServicesSection() {
+  const services = [
+    {
+      icon: Code2, title: 'SAAS PRODUCTS',
+      desc: 'Full-stack Next.js applications with Stripe payments, user auth, and automated deployments.',
+      color: '#ec4899',
+    },
+    {
+      icon: Bot, title: 'AI AGENTS',
+      desc: 'Custom AI bots for research, trading, and customer support. Telegram, Discord, and web interfaces.',
+      color: '#d946ef',
+    },
+    {
+      icon: LineChart, title: 'TRADING BOTS',
+      desc: 'Solana analytics, curve monitoring, and market intelligence dashboards with subscription access.',
+      color: '#a855f7',
+    },
+    {
+      icon: Workflow, title: 'AUTOMATION',
+      desc: 'Custom workflow automation, data pipelines, and business process optimization.',
+      color: '#7c3aed',
+    },
+  ];
 
+  return (
+    <section id="services" className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6" style={{
+            background: 'rgba(168,85,247,0.08)',
+            borderColor: 'rgba(168,85,247,0.2)',
+          }}>
+            <Zap className="w-4 h-4 text-purple-400"/>
+            <span className="font-jb text-xs text-purple-300 tracking-wide">SERVICES</span>
+          </div>
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            WHAT I BUILD
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((s, i) => (
+            <div key={i} className="group rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 cyber-card"
+              style={{
+                background: 'var(--cp-bg-card)',
+                borderColor: 'var(--cp-border)',
+                animationDelay: `${i * 100}ms`,
+              }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{
+                background: `${s.color}12`,
+                border: `1px solid ${s.color}25`,
+              }}>
+                <s.icon className="w-6 h-6" style={{ color: s.color }}/>
+              </div>
+              <h3 className="font-cyber text-sm font-bold tracking-wide text-white mb-3">{s.title}</h3>
+              <p className="font-raj text-sm text-purple-300/60 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. PULL QUOTE
+═══════════════════════════════════════════════════════════════ */
 function PullQuote() {
   return (
-    <section className="section">
-      <div className="container-page">
-        <figure className="relative max-w-4xl">
-          <Star aria-hidden className="absolute -left-2 -top-6 h-12 w-12 text-accent/20" />
-          <blockquote className="font-display text-2xl leading-[1.3] tracking-[-0.01em] text-fg sm:text-3xl md:text-4xl">
-            <p>
-              &ldquo;We came in with a vague idea and a deadline. Four weeks
-              later we had a live, revenue-generating product, with the source
-              code and a runbook we actually understand. That last part is
-              rarer than you&apos;d think.&rdquo;
-            </p>
-          </blockquote>
-          <figcaption className="mt-8 flex items-center gap-3 text-sm">
-            <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-accent2 to-accent font-mono text-xs font-bold text-ink">
-              AC
-            </div>
-            <div>
-              <div className="font-semibold text-fg">Sample testimonial</div>
-              <div className="text-xs text-dim">placeholder — replace with a real client quote</div>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
-/* ── 9. FAQ ────────────────────────────────────────────────────── */
-
-const FAQ_ITEMS: { q: string; a: string }[] = [
-  {
-    q: 'How long does a typical build take?',
-    a: 'Small engagements (a single bot or landing page) ship in 2–3 weeks. Medium builds (full SaaS MVP) in 4–6 weeks. Larger systems (multi-service platforms) are scoped in 2-week sprints. The proposal always includes a fixed timeline.',
-  },
-  {
-    q: 'Do I own the code?',
-    a: 'Yes. Every engagement ends with a full source-code handover, a runbook, and your infrastructure. We retain a non-exclusive right to reference the work in our portfolio, but otherwise you own everything we build.',
-  },
-  {
-    q: 'Can you host it for me?',
-    a: 'Yes. We can deploy to your Vultr/AWS/Hetzner account (you own the credentials), or we can host on our infrastructure with a managed-service retainer. Either way, you can migrate away at any time.',
-  },
-  {
-    q: 'What about trading risk?',
-    a: 'All trading products default to paper mode. Live trading requires explicit opt-in, separate authentication, and a written acknowledgement of risk. We do not provide financial advice, and past performance of any bot is not a guarantee of future results.',
-  },
-  {
-    q: 'How does pricing work?',
-    a: 'Fixed-price for projects, hourly for retainers. You get a written proposal before any work starts, with deliverables and acceptance criteria. We invoice in two parts: 50% to start, 50% on delivery.',
-  },
-  {
-    q: 'What if I just want to subscribe?',
-    a: 'Both MetaLaunch AI and the K187 Bot Store have a free tier to evaluate and a paid tier ($19–199/mo) for full access. Cancel anytime, no setup fees, no minimums.',
-  },
-];
-
-function FAQ() {
-  return (
-    <section id="faq" className="section border-t border-line/40 bg-surface/20">
-      <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <div className="eyebrow">FAQ</div>
-            <h2 className="h-section">Questions, answered.</h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              If your question isn&apos;t here, send a note via the contact
-              form — we reply within one business day.
-            </p>
-            <Link href="#contact" className="btn-ghost mt-6 inline-flex">
-              Ask a question <MessageSquare className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="lg:col-span-8">
-            <ul className="divide-y divide-line/60 border-y border-line/60">
-              {FAQ_ITEMS.map((item, i) => (
-                <FAQRow key={i} q={item.q} a={item.a} />
-              ))}
-            </ul>
-          </div>
+    <section className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-5xl mx-auto px-6 text-center">
+        <Hexagon className="w-16 h-16 mx-auto mb-8 text-pink-500/20"/>
+        <blockquote className="font-cyber text-3xl lg:text-5xl font-black tracking-tight leading-tight mb-8 text-transparent bg-clip-text"
+          style={{ backgroundImage: 'linear-gradient(135deg, #ec4899, #d946ef, #a855f7)' }}>
+          &quot;Stop planning. Start shipping.
+          <br/>Income follows execution.&quot;
+        </blockquote>
+        <div className="font-raj text-lg text-purple-300/50">
+          <div className="font-semibold text-purple-200/80 mb-1">123 Automate Me</div>
+          <div>— Solo dev, multiple income streams</div>
         </div>
       </div>
     </section>
   );
 }
 
-function FAQRow({ q, a }: { q: string; a: string }) {
+/* ═══════════════════════════════════════════════════════════════
+   10. FAQ
+═══════════════════════════════════════════════════════════════ */
+function FAQSection() {
+  const faqs = [
+    { q: 'Are you a solo developer or an agency?', a: 'Solo developer. I build, deploy, and maintain everything myself. That means lower overhead, no middleman markup, and direct communication from idea to launch.' },
+    { q: 'What is your typical project timeline?', a: 'Discovery + build + deploy for a SaaS product is typically 2–4 weeks. Landing pages can be live within 3–5 days. Trading bots and AI agents depend on complexity but I ship working POCs within the first week.' },
+    { q: 'How do payments work?', a: 'All products with subscription access use Stripe — you sign up, choose a tier, and you are in. One-time projects are scoped with a signed proposal and milestone payments.' },
+    { q: 'Do you offer ongoing support?', a: 'Yes. Every product includes 30 days of post-launch support. Extended maintenance is available as a monthly service.' },
+    { q: 'What tech stack do you use?', a: 'Next.js 15, TypeScript, Prisma + SQLite, Docker, nginx, hosted on Vultr VPS with Cloudflare DNS. Stripe for payments, Solana for crypto integrations.' },
+  ];
+
   return (
-    <li>
-      <details className="group">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 transition">
-          <span className="text-base font-semibold text-fg sm:text-lg">{q}</span>
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line bg-surface/60 transition group-open:bg-accent/15 group-open:border-accent/40">
-            <Plus className="h-3.5 w-3.5 text-muted transition group-open:hidden" />
-            <Minus className="hidden h-3.5 w-3.5 text-accent group-open:block" />
-          </span>
-        </summary>
-        <div className="pb-6 pr-12 text-sm leading-relaxed text-muted">{a}</div>
-      </details>
-    </li>
+    <section className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">FAQ</h2>
+          <p className="font-raj text-xl text-purple-300/60">Common questions, direct answers.</p>
+        </div>
+        <div className="space-y-4">
+          {faqs.map((f, i) => (
+            <details key={i} className="group rounded-xl border overflow-hidden cyber-card" style={{
+              background: 'var(--cp-bg-card)',
+              borderColor: 'var(--cp-border)',
+              animationDelay: `${i * 80}ms`,
+            }}>
+              <summary className="flex items-center justify-between px-6 py-5 cursor-pointer list-none">
+                <span className="font-raj text-lg font-semibold text-white">{f.q}</span>
+                <span className="ml-6 text-2xl text-pink-500/60 group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <div className="px-6 pb-5 font-raj text-purple-300/60 leading-relaxed">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
-/* ── 10. Final CTA + Contact form ──────────────────────────────── */
-
+/* ═══════════════════════════════════════════════════════════════
+   11. FINAL CTA + CONTACT
+═══════════════════════════════════════════════════════════════ */
 function FinalCTA() {
   return (
-    <section id="contact" className="section">
-      <div className="container-page">
-        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* CTA copy */}
-          <div className="lg:col-span-5">
-            <div className="eyebrow">Get in touch</div>
-            <h2 className="h-section">Let&apos;s build something.</h2>
-            <p className="lede mt-5">
-              Tell us what you want to automate. We reply within one
-              business day, usually with a short call invite.
+    <section id="contact" className="py-32 border-t" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left: CTA text */}
+          <div className="space-y-6">
+            <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white">
+              READY TO<br/>
+              <span className="text-transparent bg-clip-text" style={{
+                backgroundImage: 'linear-gradient(135deg, #ec4899, #d946ef)',
+              }}>AUTOMATE?</span>
+            </h2>
+            <p className="font-raj text-xl text-purple-300/60 leading-relaxed">
+              Let&apos;s talk about your project. Email, call, or fill out the form — I respond within 24 hours.
             </p>
-            <ul className="mt-8 space-y-4 text-sm text-fg/90">
-              <li className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-surface/60">
-                  <Mail className="h-4 w-4 text-accent" />
-                </span>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.2)',
+                }}>
+                  <Mail className="w-5 h-5 text-pink-400"/>
+                </div>
                 <div>
-                  <div className="mono-tag">email</div>
-                  <a href="mailto:hello@123automateme.com" className="text-fg hover:text-accent">
+                  <div className="font-jb text-xs text-purple-500">EMAIL</div>
+                  <a href="mailto:hello@123automateme.com" className="font-raj text-lg text-white hover:text-pink-400 transition-colors">
                     hello@123automateme.com
                   </a>
                 </div>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-surface/60">
-                  <Phone className="h-4 w-4 text-accent" />
-                </span>
-                <div>
-                  <div className="mono-tag">mobile</div>
-                  <span className="text-muted">on request — email first</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)',
+                }}>
+                  <Phone className="w-5 h-5 text-purple-400"/>
                 </div>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-surface/60">
-                  <Clock className="h-4 w-4 text-accent" />
-                </span>
                 <div>
-                  <div className="mono-tag">hours</div>
-                  <span className="text-fg">AEST · Mon–Fri · 9am–6pm</span>
+                  <div className="font-jb text-xs text-purple-500">PHONE</div>
+                  <span className="font-raj text-lg text-white">Available on request</span>
                 </div>
-              </li>
-            </ul>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                  background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)',
+                }}>
+                  <Clock className="w-5 h-5 text-purple-400"/>
+                </div>
+                <div>
+                  <div className="font-jb text-xs text-purple-500">RESPONSE TIME</div>
+                  <span className="font-raj text-lg text-white">Within 24 hours</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Form */}
-          <ContactForm />
+          {/* Right: Contact form */}
+          <div className="rounded-2xl border p-6" style={{
+            background: 'var(--cp-bg-card)',
+            borderColor: 'var(--cp-border)',
+          }}>
+            <form action="/api/contact" method="POST" className="space-y-4">
+              {/* Honeypot */}
+              <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off"/>
+
+              <div>
+                <label className="font-jb text-xs text-purple-500 block mb-2">NAME</label>
+                <input type="text" name="name" required
+                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30 transition-all"
+                  style={{
+                    background: 'rgba(10,5,20,0.5)',
+                    border: '1px solid var(--cp-border)',
+                  }}
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label className="font-jb text-xs text-purple-500 block mb-2">EMAIL</label>
+                <input type="email" name="email" required
+                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30 transition-all"
+                  style={{
+                    background: 'rgba(10,5,20,0.5)',
+                    border: '1px solid var(--cp-border)',
+                  }}
+                  placeholder="you@email.com"
+                />
+              </div>
+              <div>
+                <label className="font-jb text-xs text-purple-500 block mb-2">PROJECT DETAILS</label>
+                <textarea name="message" required rows={4}
+                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30 transition-all resize-none"
+                  style={{
+                    background: 'rgba(10,5,20,0.5)',
+                    border: '1px solid var(--cp-border)',
+                  }}
+                  placeholder="Tell me about your project..."
+                />
+              </div>
+              <button type="submit"
+                className="w-full px-6 py-4 rounded-xl font-raj font-bold text-lg tracking-wide text-white transition-all hover:scale-[1.02]"
+                style={{
+                  background: 'linear-gradient(135deg, #ec4899, #d946ef)',
+                  boxShadow: '0 0 30px rgba(236,72,153,0.3)',
+                }}>
+                SEND MESSAGE →
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function ContactForm() {
+/* ═══════════════════════════════════════════════════════════════
+   12. FOOTER
+═══════════════════════════════════════════════════════════════ */
+function Footer() {
   return (
-    <form action="/api/contact" method="POST" className="card relative overflow-hidden p-7 sm:p-9 lg:col-span-7">
-      <div aria-hidden className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
-      <div className="relative">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Field id="name"    name="name"    label="Name"    type="text"     required autoComplete="name"    placeholder="Your name" />
-          <Field id="email"   name="email"   label="Email"   type="email"    required autoComplete="email"   placeholder="you@company.com" />
-          <Field id="company" name="company" label="Company (optional)" type="text" autoComplete="organization" placeholder="Acme Pty Ltd" className="sm:col-span-2" />
+    <footer className="border-t py-12" style={{ borderColor: 'var(--cp-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #ec4899, #a855f7)',
+              }}>
+                <Hexagon className="w-4 h-4 text-white"/>
+              </div>
+              <span className="font-cyber font-bold text-sm text-white tracking-wider">123AUTO</span>
+            </div>
+            <p className="font-raj text-sm text-purple-300/50 leading-relaxed">
+              Solo developer building, deploying, and monetizing web products.
+            </p>
+          </div>
+          <div>
+            <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">PRODUCTS</div>
+            <ul className="space-y-2 font-raj text-sm text-purple-300/50">
+              <li><a href="https://cards.123automateme.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">KAIO&apos;S CARDS</a></li>
+              <li><a href="https://app.vivalarassa.fun" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">Apex Trading</a></li>
+              <li><a href="/designwithhermes" className="hover:text-pink-400 transition-colors">Design With Hermes</a></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">COMPANY</div>
+            <ul className="space-y-2 font-raj text-sm text-purple-300/50">
+              <li><a href="#portfolio" className="hover:text-pink-400 transition-colors">Portfolio</a></li>
+              <li><a href="#services" className="hover:text-pink-400 transition-colors">Services</a></li>
+              <li><a href="#contact" className="hover:text-pink-400 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">LEGAL</div>
+            <ul className="space-y-2 font-raj text-sm text-purple-300/50">
+              <li><Link href="/terms" className="hover:text-pink-400 transition-colors">Terms</Link></li>
+              <li><Link href="/privacy" className="hover:text-pink-400 transition-colors">Privacy</Link></li>
+            </ul>
+          </div>
         </div>
-        <div className="mt-5">
-          <label htmlFor="message" className="block text-sm font-medium text-fg">What do you want to automate?</label>
-          <textarea
-            id="message" name="message" required rows={5}
-            className="mt-2 block w-full rounded-lg border border-line bg-ink/60 px-3 py-2.5 text-sm text-fg placeholder-dim focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-            placeholder="The workflow you want automated, the system you&apos;re using, and any deadlines."
-          />
-        </div>
-        {/* Honeypot */}
-        <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-        <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-dim">
-            We reply within one business day. No spam, ever.
-          </p>
-          <button type="submit" className="btn-primary">
-            Send message <ArrowRight className="h-4 w-4" />
-          </button>
+
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t text-sm" style={{ borderColor: 'var(--cp-border)' }}>
+          <span className="font-jb text-xs text-purple-500">
+            © 2026 123automateme.com · All rights reserved
+          </span>
+          <span className="font-jb text-xs text-purple-500/40 mt-2 md:mt-0">
+            Built with Next.js · Deployed on Vultr · DNS via Cloudflare
+          </span>
         </div>
       </div>
-    </form>
-  );
-}
-
-function Field({
-  id, name, label, type = 'text', required, autoComplete, placeholder, className = '',
-}: {
-  id: string; name: string; label: string;
-  type?: string; required?: boolean; autoComplete?: string;
-  placeholder?: string; className?: string;
-}) {
-  return (
-    <div className={className}>
-      <label htmlFor={id} className="block text-sm font-medium text-fg">{label}</label>
-      <input
-        id={id} name={name} type={type} required={required} autoComplete={autoComplete}
-        className="mt-2 block w-full rounded-lg border border-line bg-ink/60 px-3 py-2.5 text-sm text-fg placeholder-dim focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-        placeholder={placeholder}
-      />
-    </div>
+    </footer>
   );
 }
