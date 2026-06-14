@@ -1,6 +1,6 @@
 {
   "name": "123automateme-hub",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Public landing page and client hub for 123automateme.com",
   "type": "module",
@@ -16,7 +16,8 @@
     "next": "15.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "resend": "4.0.1"
+    "resend": "4.0.1",
+    "lucide-react": "0.469.0"
   },
   "devDependencies": {
     "@types/node": "22.9.0",
