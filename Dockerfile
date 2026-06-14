@@ -30,6 +30,7 @@ RUN addgroup --system --gid 1001 nodejs \
 
 COPY --from=build --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=build --chown=nextjs:nodejs /app/public ./public
+COPY --from=build --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=build --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=build /app/next.config.mjs ./next.config.mjs
 
