@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import {
-  ArrowRight, CheckCircle2, Cpu, Bot, LineChart, Globe, Shield,
-  Sparkles, Gamepad2, Activity, Star, Briefcase, Code2, Wrench,
-  Rocket, Zap, Award, Clock, DollarSign, Users, Phone, Mail,
-  Calendar, MapPin, Hexagon, Layers, GitBranch, Terminal, Server,
-  Database, Lock, ChevronRight, ExternalLink,
+  ArrowRight, Cpu, Bot, LineChart, Globe, Shield,
+  Sparkles, Activity, Star, Briefcase, Code2, Wrench,
+  Rocket, Zap, Award, Clock, Phone, Mail,
+  Hexagon, Layers, GitBranch, Terminal, Server,
+  Database, ChevronRight, ExternalLink, Wallet,
+  Hammer, Truck, Mic, BarChart3, Compass, GraduationCap,
+  Coins, TrendingUp, Eye, FileText, Radio,
 } from 'lucide-react';
 
 /* ════════════════════════════════════════════════════════════════
-   123automateme.com — CV/Portfolio Landing (2026)
-   Single-page resume + portfolio showcasing all builds
+   123automateme.com — SaaS CV (2026)
+   Full professional portfolio with 18+ real products
    ════════════════════════════════════════════════════════════════ */
 
 const cyberpunkCSS = `
@@ -39,216 +41,257 @@ const cyberpunkCSS = `
 `;
 
 /* ═══════════════════════════════════════════════════════════════
-   DATA: All live products + services
+   DATA: All 18+ real products from the actual builds
 ═══════════════════════════════════════════════════════════════ */
 const PRODUCTS = [
   {
-    name: 'KAIO\'S CARDS',
-    cat: 'COLLECTIBLES · FREE TOOL',
-    desc: 'Pokémon TCG price lookup, barcode scanner, and trade analyzer. 15,000+ cards indexed with real-time TCGplayer + Cardmarket pricing.',
-    url: 'https://cards.123automateme.com',
-    landing: '/kaios-cards',
-    icon: Gamepad2,
-    color: '#ec4899',
-    tags: ['Free', 'No Account', 'Barcode Scanner', 'Trade Analyzer'],
-    stack: ['Node.js', 'Express', 'pokemontcg.io', 'Docker'],
-    status: 'LIVE',
-    revenue: 'Free / Affiliate',
-  },
-  {
     name: 'APEX RESEARCH BOT',
-    cat: 'FINTECH · STRIPE-GATED',
-    desc: 'AI-powered crypto research assistant. Stripe subscription: $9 single query or $29/month recurring. 6 active users.',
-    url: 'https://research.vivalarassa.fun',
-    landing: null,
+    cat: 'FINTECH · STRIPE-GATED · TELEGRAM',
+    desc: 'Monetized Telegram bot with 12 hedge-fund research commands. Models Citadel, Bridgewater, Point72, RenTech, Pershing Square, Millennium, AQR, Tiger Global, Viking Global, Coatue, DE Shaw, and Baupost. AI-powered analysis, free trial, Stripe billing.',
     icon: Bot,
-    color: '#d946ef',
-    tags: ['$9 One-time', '$29/mo Subscription', 'Stripe Live', '6 users'],
-    stack: ['Node.js', 'Telegram API', 'Stripe', 'SQLite'],
+    color: '#ec4899',
+    tags: ['Stripe Live', '$9 / query', '$29/mo sub', '12 commands', '6 users'],
+    stack: ['Node.js', 'Telegram API', 'OpenAI', 'Stripe', 'SQLite'],
     status: 'EARNING',
     revenue: '$9 / $29 / mo',
-  },
-  {
-    name: 'APEX TRADING BOT',
-    cat: 'FINTECH · ANALYTICS',
-    desc: 'Solana trading analytics & execution platform. WebSocket data feeds, real-time market analysis, automated strategies.',
-    url: 'https://trading.vivalarassa.fun',
-    landing: null,
-    icon: LineChart,
-    color: '#a855f7',
-    tags: ['Solana', 'WebSocket', 'Real-time', 'DEX data'],
-    stack: ['Node.js', 'WebSocket', 'Jupiter API', 'PM2'],
-    status: 'LIVE',
-    revenue: 'Future tier',
+    url: null,
   },
   {
     name: 'NEXUS AI',
     cat: 'AI AGENT · STRIPE-GATED',
-    desc: 'Multi-tier AI trading hub. Starter/Pro/Elite subscriptions via Stripe + SOL payments. Full community dashboard.',
-    url: 'https://app.vivalarassa.fun',
-    landing: null,
+    desc: 'Multi-tier AI trading hub. Starter/Pro/Elite subscriptions via Stripe + SOL payments. Cyberpunk-themed React UI streaming Claude via Anthropic SSE. Live signal monitoring + APEX-XEPA engine dashboard.',
     icon: Cpu,
-    color: '#7c3aed',
-    tags: ['3 Tiers', 'Stripe Live', 'SOL payments', 'Community'],
-    stack: ['Node.js', 'Solana', 'Stripe', 'Vultr VPS'],
+    color: '#d946ef',
+    tags: ['3 Tiers', 'Stripe Live', 'SOL payments', 'Claude SSE'],
+    stack: ['React', 'Express', 'Stripe', 'Solana', 'Anthropic SSE'],
     status: 'EARNING',
     revenue: '$29 / $99 / $299 / mo',
+    url: 'https://app.vivalarassa.fun',
   },
   {
-    name: 'SOLANA ANALYTICS RESEARCH',
-    cat: 'RESEARCH · READ-ONLY',
-    desc: 'Read-only Solana blockchain research tool. Bonding curve analysis, wallet tracking, pool scanning, market insights. 1,379 LOC, 8 CLI commands, 8 API endpoints.',
-    url: 'https://research.123automateme.com',
-    landing: null,
-    icon: Activity,
-    color: '#ec4899',
-    tags: ['Read-only', 'CLI', '8 endpoints', 'No manipulation'],
-    stack: ['Node.js', 'Solana RPC', 'Express', 'Socket.io'],
+    name: 'AUSSIE HOMESCHOOL HUB',
+    cat: 'EDUCATION · SAAS · STRIPE',
+    desc: 'ACARA-aligned Australian homeschool platform. Curriculum guides, financial cost planner, family discount pricing, subscription billing, referral system (referrer gets 1 month free, referred gets 20% off). Real Stripe checkout + webhook + PDF generation.',
+    icon: GraduationCap,
+    color: '#a855f7',
+    tags: ['Stripe Live', 'Webhooks', 'PDF gen', 'Referrals', 'ACARA'],
+    stack: ['Express', 'tRPC', 'Stripe', 'Supabase'],
+    status: 'EARNING-READY',
+    revenue: 'Subscription',
+    url: 'https://nexus.vivalarassa.fun',
+  },
+  {
+    name: 'APEX XEPA HUB',
+    cat: 'FINTECH · TRADING DASHBOARD',
+    desc: 'Multi-chain trading hub with 14 sections: Dashboard, Forex/US30, Crypto (SOL/ETH/BSC), Pump.fun Scanner, DexScreener, Arbitrage, Strategies, Backtesting, Marketplace, AI Tools, Signals, Wallets, Polymarket, Config. Dark terminal aesthetic. Multi-wallet (Phantom, MetaMask, Solflare, WalletConnect, Backpack).',
+    icon: BarChart3,
+    color: '#7c3aed',
+    tags: ['14 sections', '5 wallets', '5 chains', 'Cyberpunk UI'],
+    stack: ['React 18', 'Vite', 'Tailwind', 'Framer Motion', 'Lightweight Charts'],
     status: 'LIVE',
     revenue: 'SaaS-ready',
+    url: null,
+  },
+  {
+    name: 'AERIAL ESTIMATES',
+    cat: 'CONSTRUCTION · AI · SAAS',
+    desc: 'AI-powered aerial measurement and quoting for Australian construction. Supabase PostgreSQL, Stripe-integrated referral system ($10 credit per paid referral, first quote free). Database migrations, leaderboard, webhook handlers.',
+    icon: Truck,
+    color: '#ec4899',
+    tags: ['Supabase', 'Stripe', 'Referrals', 'Leaderboard', 'Aerial AI'],
+    stack: ['Node.js', 'Express', 'Supabase', 'Stripe', 'React'],
+    status: 'LIVE',
+    revenue: 'Quote-based',
+    url: null,
+  },
+  {
+    name: 'METALAUNCH AI',
+    cat: 'SOLANA · TOKEN LAUNCHER',
+    desc: 'AI-powered Solana meme coin launch platform with Pump.fun integration. Detects trending memes from TikTok/X, generates meta-relevant token tickers and branding, auto-launches tokens on Pump.fun via PumpPortal API. Real-time dashboard, profit-taking strategies.',
+    icon: Rocket,
+    color: '#d946ef',
+    tags: ['Pump.fun', 'AI branding', 'Auto-launch', 'Profit-take'],
+    stack: ['Node.js', 'TypeScript', 'PumpPortal API', 'Vite', 'Drizzle'],
+    status: 'LIVE',
+    revenue: 'Token-fee',
+    url: null,
+  },
+  {
+    name: 'APEX TRADING DASHBOARD',
+    cat: 'FINTECH · TRADING · LIVE',
+    desc: 'Apex Developments consolidated trading bot dashboard. Solana analytics, WebSocket data feeds, real-time market analysis, 47 days continuous uptime on production VPS.',
+    icon: LineChart,
+    color: '#a855f7',
+    tags: ['WebSocket', 'Solana', '47d uptime', 'Real-time'],
+    stack: ['Node.js', 'WebSocket', 'Jupiter API', 'PM2'],
+    status: 'LIVE',
+    revenue: 'Future tier',
+    url: null,
+  },
+  {
+    name: 'PRIMOS LEADERBOARD',
+    cat: 'SOLANA · NFT ANALYTICS',
+    desc: 'Live leaderboard of top wallets holding Primos NFTs (Solana/Tensor Trade collection). Shows wallet rank, position size, floor value, percentage of supply, links to active Tensor profile. Auto-refreshes every 60 seconds via Magic Eden public API.',
+    icon: TrendingUp,
+    color: '#7c3aed',
+    tags: ['Tensor API', 'Magic Eden', '60s refresh', 'Live data'],
+    stack: ['Node.js', 'Magic Eden API', 'Express'],
+    status: 'LIVE',
+    revenue: 'Free / Affiliate',
+    url: null,
+  },
+  {
+    name: 'SOLANA TOKEN SNIPER',
+    cat: 'SOLANA · TRADING DAPP',
+    desc: 'Professional Solana token sniping dApp with MEV protection, token analysis, transaction history, and Phantom wallet integration. Real-time market data, slippage protection, anti-rug detection.',
+    icon: Zap,
+    color: '#ec4899',
+    tags: ['MEV protect', 'Phantom', 'Anti-rug', 'Real-time'],
+    stack: ['Node.js', 'Solana Web3', 'Phantom'],
+    status: 'LIVE',
+    revenue: 'Trade-fee',
+    url: null,
+  },
+  {
+    name: 'POLYBACK',
+    cat: 'PREDICTION MARKETS · ANALYTICS',
+    desc: 'Polymarket strategy reverse tool. Analyzes successful trading patterns, surfaces profitable strategies, identifies market inefficiencies. Companion to Polycrack for strategy validation.',
+    icon: Eye,
+    color: '#d946ef',
+    tags: ['Polymarket', 'Strategy', 'Pattern match', 'Analytics'],
+    stack: ['Node.js', 'Polymarket API', 'Analytics'],
+    status: 'LIVE',
+    revenue: 'SaaS-ready',
+    url: null,
   },
   {
     name: 'K187 STORE BOT',
     cat: 'TELEGRAM BOT · E-COMMERCE',
-    desc: 'Telegram storefront for digital products. Product catalog, Stripe checkout, order fulfillment, customer database.',
-    url: 'https://t.me/k187_store_bot',
-    landing: null,
-    icon: Sparkles,
-    color: '#d946ef',
+    desc: 'Telegram storefront for digital products. Product catalog (Apex Research $29, Solana Token Launcher Pro $99, K187 Volume Booster $49), Stripe checkout, order fulfillment, customer database, webhook integration.',
+    icon: Truck,
+    color: '#a855f7',
     tags: ['Telegram', 'Stripe Checkout', '3 products', 'Order DB'],
     stack: ['Telegraf', 'Stripe', 'SQLite', 'Express'],
     status: 'READY',
     revenue: '$29 / $49 / $99',
-  },
-  {
-    name: 'AUSSIE HOMESCHOOL HUB',
-    cat: 'EDUCATION · SAAS',
-    desc: 'Homeschooling platform with curriculum, schedules, children tracking, subscription billing. PDF generation, Stripe checkout live.',
-    url: 'https://nexus.vivalarassa.fun',
-    landing: null,
-    icon: Layers,
-    color: '#a855f7',
-    tags: ['Stripe Live', 'Webhooks', 'PDFs', 'Education'],
-    stack: ['Express', 'tRPC', 'Stripe', 'Supabase-ready'],
-    status: 'LIVE',
-    revenue: 'Subscription-ready',
-  },
-  {
-    name: 'NEXUS X BOT',
-    cat: 'AUTOMATION · CONTENT',
-    desc: 'Automated X/Twitter content scheduler for the K187 community. Posts market updates, engagement threads, brand content.',
-    url: 'https://x.com/k187nexus',
-    landing: null,
-    icon: GitBranch,
-    color: '#7c3aed',
-    tags: ['Twitter API', 'Cron', 'Content', '3d uptime'],
-    stack: ['Node.js', 'Twitter API', 'PM2'],
-    status: 'LIVE',
-    revenue: 'Brand growth',
-  },
-  {
-    name: 'K187 ADMIN DASHBOARD',
-    cat: 'INFRASTRUCTURE · INTERNAL',
-    desc: 'Solana wallet-authenticated admin panel. Container orchestrator, log viewer, deployment control, customer management.',
-    url: 'https://admin.vivalarassa.fun',
-    landing: null,
-    icon: Shield,
-    color: '#ec4899',
-    tags: ['Solana wallet auth', 'Multi-container', 'Logs', 'Deploys'],
-    stack: ['Docker', 'PostgreSQL', 'Redis', 'nginx'],
-    status: 'LIVE',
-    revenue: 'Internal',
-  },
-  {
-    name: 'K187 LOGS VIEWER',
-    cat: 'INFRASTRUCTURE · MONITORING',
-    desc: 'Real-time log aggregation & search across all PM2 bots and Docker containers. Filter by service, time, level.',
-    url: 'https://logs.vivalarassa.fun',
-    landing: null,
-    icon: Terminal,
-    color: '#d946ef',
-    tags: ['Real-time', 'Log search', 'Multi-source', '10d uptime'],
-    stack: ['Node.js', 'WebSocket', 'PostgreSQL'],
-    status: 'LIVE',
-    revenue: 'Internal',
-  },
-  {
-    name: 'K187 API BACKEND',
-    cat: 'INFRASTRUCTURE · API',
-    desc: 'Main API backend serving the vivalarassa ecosystem. Auth, user management, payments, data pipelines. 10d uptime, healthy.',
-    url: 'https://api.vivalarassa.fun',
-    landing: null,
-    icon: Server,
-    color: '#a855f7',
-    tags: ['Express', 'PostgreSQL', 'Redis', '10d uptime'],
-    stack: ['Node.js', 'Postgres', 'Redis', 'Docker'],
-    status: 'LIVE',
-    revenue: 'Internal',
-  },
-  {
-    name: 'K187 TRADING ENGINE',
-    cat: 'INFRASTRUCTURE · TRADING',
-    desc: 'On-chain trading engine. Order management, market data, execution layer for trading bots. 10d uptime, healthy.',
     url: null,
-    landing: null,
-    icon: Database,
+  },
+  {
+    name: 'BUBBLE MAPS',
+    cat: 'SOLANA · ANALYTICS',
+    desc: 'Solana bubble maps analytics. Visualize token holder distribution, identify whale wallets, track concentration risk. Read-only data tool, no manipulation, market transparency focused.',
+    icon: Compass,
     color: '#7c3aed',
-    tags: ['On-chain', 'Order mgmt', 'Execution', '10d uptime'],
-    stack: ['Node.js', 'Solana', 'Docker'],
+    tags: ['Bubble viz', 'Whale track', 'Read-only', 'Risk analytics'],
+    stack: ['Node.js', 'Solana RPC', 'D3.js'],
+    status: 'LIVE',
+    revenue: 'SaaS-ready',
+    url: null,
+  },
+  {
+    name: 'AI AD-LIB LIVE',
+    cat: 'AI · MUSIC · REAL-TIME',
+    desc: 'Real-time AI ad-lib and hook generator that listens to your mic, follows your tempo and melody. Generates contextually relevant lyrics on the fly for freestyle sessions, live performance, content creation.',
+    icon: Mic,
+    color: '#ec4899',
+    tags: ['Real-time mic', 'Tempo follow', 'Melody aware', 'AI lyrics'],
+    stack: ['Node.js', 'Web Audio API', 'LLM'],
+    status: 'LIVE',
+    revenue: 'Subscription',
+    url: null,
+  },
+  {
+    name: 'YOUTUBE SHORTS PIPELINE',
+    cat: 'CONTENT · AUTOMATION',
+    desc: 'Automated YouTube Shorts pipeline: news → script → AI visuals → voiceover → captions → upload. Hands-free content production for niche channels. Configurable topics, automated scheduling.',
+    icon: Radio,
+    color: '#d946ef',
+    tags: ['News → video', 'AI voice', 'Auto upload', 'Niche content'],
+    stack: ['Node.js', 'FFmpeg', 'OpenAI TTS', 'YouTube API'],
+    status: 'LIVE',
+    revenue: 'Ad revenue',
+    url: null,
+  },
+  {
+    name: 'K187 PORTFOLIO AUDIT',
+    cat: 'MOBILE · EXPO',
+    desc: 'Dark-mode iOS-style mobile app (Expo + React Native) for portfolio auditing. Cross-platform, native feel, audit-grade UI for tracking product status, revenue, and uptime on the go.',
+    icon: FileText,
+    color: '#a855f7',
+    tags: ['iOS-style', 'Expo', 'React Native', 'Cross-platform'],
+    stack: ['Expo', 'React Native', 'TypeScript'],
     status: 'LIVE',
     revenue: 'Internal',
+    url: null,
   },
+  {
+    name: 'K187 NEXUS PLATFORM',
+    cat: 'INFRASTRUCTURE · OPS',
+    desc: 'K187 Nexus AI Platform — Subscription Command Center + Docker Nexus Suite. Container orchestrator, deployment automation, subscription management, customer portal. Powers the entire vivalarassa ecosystem.',
+    icon: Server,
+    color: '#7c3aed',
+    tags: ['Docker suite', 'Subscription cmd', 'Auto-deploy', 'Customer portal'],
+    stack: ['Docker Compose', 'PostgreSQL', 'Redis', 'nginx'],
+    status: 'LIVE',
+    revenue: 'Internal',
+    url: null,
+  },
+];
+
+const INFRA = [
+  { name: 'K187 Admin Dashboard', desc: 'Solana wallet auth, container control, deploys', url: 'https://admin.vivalarassa.fun', icon: Shield, uptime: '21d' },
+  { name: 'K187 Logs Viewer', desc: 'Real-time log aggregation, multi-source search', url: 'https://logs.vivalarassa.fun', icon: Terminal, uptime: '10d' },
+  { name: 'K187 API Backend', desc: 'Express + PostgreSQL + Redis, 10d uptime', url: 'https://api.vivalarassa.fun', icon: Server, uptime: '10d' },
+  { name: 'K187 Trading Engine', desc: 'On-chain order management + execution', url: null, icon: Database, uptime: '10d' },
+  { name: 'Apex Trading Bot', desc: 'Solana WebSocket analytics, 47d uptime', url: null, icon: LineChart, uptime: '47d' },
+  { name: 'Nexus X Bot', desc: 'X/Twitter content scheduler', url: null, icon: GitBranch, uptime: '3d' },
 ];
 
 const SERVICES = [
-  {
-    icon: Code2,
-    title: 'FULL-STACK SAAS',
-    desc: 'Next.js 15 + Prisma + PostgreSQL/SQLite. From idea to production. Stripe-integrated, Docker-deployed, auto-scaling.',
-    color: '#ec4899',
-  },
-  {
-    icon: Bot,
-    title: 'AI AGENTS & BOTS',
-    desc: 'Custom AI bots for research, trading, customer support, content. Telegram, Discord, web interfaces.',
-    color: '#d946ef',
-  },
-  {
-    icon: LineChart,
-    title: 'TRADING INFRASTRUCTURE',
-    desc: 'Solana, Ethereum, BSC. DEX data, bonding curves, real-time analytics. Subscription-gated access.',
-    color: '#a855f7',
-  },
-  {
-    icon: Wrench,
-    title: 'AUTOMATION & DEVOPS',
-    desc: 'Docker orchestration, CI/CD, monitoring, log aggregation. nginx + certbot + Cloudflare. Production-grade.',
-    color: '#7c3aed',
-  },
-  {
-    icon: Globe,
-    title: 'WEB DESIGN (AGENCY)',
-    desc: 'Landing pages, marketing sites, product pages. Hand-crafted, conversion-focused. Brand system: Design With Hermes.',
-    color: '#ec4899',
-  },
-  {
-    icon: Shield,
-    title: 'INFRASTRUCTURE AS A SERVICE',
-    desc: 'Vultr VPS setup, nginx reverse proxy, SSL certs, DNS, monitoring. Take any product from localhost to public.',
-    color: '#d946ef',
-  },
+  { icon: Code2, title: 'FULL-STACK SAAS', desc: 'Next.js 15 + Prisma + PostgreSQL. From idea to production. Stripe-integrated, Docker-deployed, auto-scaling.', color: '#ec4899' },
+  { icon: Bot, title: 'AI AGENTS & BOTS', desc: 'Custom AI bots for research, trading, content. Telegram, Discord, web interfaces. Real LLM integration.', color: '#d946ef' },
+  { icon: LineChart, title: 'TRADING INFRASTRUCTURE', desc: 'Solana, Ethereum, BSC. DEX data, bonding curves, real-time analytics. Subscription-gated access.', color: '#a855f7' },
+  { icon: Wrench, title: 'DEVOPS & INFRA', desc: 'Docker orchestration, CI/CD, monitoring, log aggregation. nginx + certbot + Cloudflare.', color: '#7c3aed' },
+  { icon: Globe, title: 'WEB DESIGN', desc: 'Landing pages, marketing sites, product pages. Hand-crafted, conversion-focused. Brand: Design With Hermes.', color: '#ec4899' },
+  { icon: Hammer, title: 'MOBILE APPS', desc: 'Expo + React Native, iOS + Android from one codebase. Native feel, cross-platform.', color: '#d946ef' },
 ];
 
 const STATS = [
-  { value: '12+', label: 'Live Products', sub: 'All running right now' },
+  { value: '18+', label: 'Live Products', sub: 'All running now' },
   { value: '6', label: 'Stripe-Integrated', sub: 'Accepting payments' },
-  { value: '47d', label: 'Longest Uptime', sub: 'apex-trading bot' },
-  { value: '$29', label: 'Starting From', sub: '/month subscriptions' },
+  { value: '47d', label: 'Longest Uptime', sub: 'Apex Trading Bot' },
+  { value: '24/7', label: 'Production', sub: 'Vultr VPS' },
+];
+
+const SKILLS = [
+  { cat: 'Frontend', items: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind', 'Framer Motion', 'Vite'] },
+  { cat: 'Backend', items: ['Node.js', 'Express', 'FastAPI', 'PostgreSQL', 'Prisma', 'SQLite', 'Redis', 'tRPC'] },
+  { cat: 'DevOps', items: ['Docker', 'Docker Compose', 'nginx', 'PM2', 'GitHub Actions', 'Vultr', 'Cloudflare'] },
+  { cat: 'Blockchain', items: ['Solana Web3', 'Jupiter API', 'Raydium', 'Pump.fun', 'WebSocket feeds', 'Wallet auth'] },
+  { cat: 'AI / ML', items: ['Anthropic Claude', 'OpenAI', 'Telegraf bots', 'Telegram API', 'Real-time streaming', 'AI agents'] },
+  { cat: 'Payments', items: ['Stripe Checkout', 'Subscriptions', 'Webhooks', 'Customer Portal', 'SOL payments', 'Referrals'] },
+];
+
+const STACK = [
+  { name: 'Next.js 15', use: 'Frontend + SSR', color: '#ec4899' },
+  { name: 'TypeScript', use: 'Type safety', color: '#d946ef' },
+  { name: 'Node.js', use: 'Backend runtime', color: '#a855f7' },
+  { name: 'Prisma', use: 'ORM + migrations', color: '#7c3aed' },
+  { name: 'PostgreSQL', use: 'Primary database', color: '#ec4899' },
+  { name: 'SQLite', use: 'Lightweight data', color: '#d946ef' },
+  { name: 'Docker', use: 'Containerization', color: '#a855f7' },
+  { name: 'nginx', use: 'Reverse proxy', color: '#7c3aed' },
+  { name: 'PM2', use: 'Process manager', color: '#ec4899' },
+  { name: 'Stripe', use: 'Payments', color: '#d946ef' },
+  { name: 'Solana', use: 'Web3 + wallets', color: '#a855f7' },
+  { name: 'Cloudflare', use: 'DNS + proxy', color: '#7c3aed' },
+  { name: 'Vultr', use: 'VPS hosting', color: '#ec4899' },
+  { name: 'GitHub', use: 'Source control', color: '#d946ef' },
 ];
 
 const PROCESS = [
   { n: '01', t: 'DISCOVERY', d: 'We map your workflow, identify automation opportunities, scope the build. Concrete deliverables, no vague promises.' },
-  { n: '02', t: 'BUILD', d: 'Sprint-based development. Next.js frontend, Prisma database, Docker infrastructure. Every line tested, every deploy validated.' },
+  { n: '02', t: 'BUILD', d: 'Sprint-based development. Frontend, backend, database, infrastructure. Every line tested, every deploy validated.' },
   { n: '03', t: 'DEPLOY', d: 'Push to production on your VPS. SSL certificates, DNS, nginx reverse proxy, health checks. All automated, all verified.' },
   { n: '04', t: 'MONETIZE', d: 'Stripe checkout, subscription tiers, webhooks. Your product starts earning from day one. Customer portal included.' },
 ];
@@ -256,9 +299,18 @@ const PROCESS = [
 const FAQS = [
   { q: 'Are you a solo developer or an agency?', a: 'Solo developer. I build, deploy, and maintain everything myself. Lower overhead, no middleman markup, direct communication from idea to launch.' },
   { q: 'What is your typical project timeline?', a: 'Discovery + build + deploy for a SaaS product is typically 2-4 weeks. Landing pages can be live within 3-5 days. Trading bots and AI agents depend on complexity but I ship working POCs within the first week.' },
-  { q: 'How do payments work?', a: 'All subscription products use Stripe - you sign up, choose a tier, you are in. One-time projects are scoped with a signed proposal and milestone payments. Single Stripe account covers all products.' },
+  { q: 'How do payments work?', a: 'All subscription products use Stripe — you sign up, choose a tier, you are in. One-time projects are scoped with a signed proposal and milestone payments. Single Stripe account covers all products.' },
   { q: 'Do you offer ongoing support?', a: 'Yes. Every product includes 30 days of post-launch support. Extended maintenance available as a monthly service.' },
   { q: 'What tech stack do you use?', a: 'Next.js 15, TypeScript, Prisma + PostgreSQL/SQLite, Docker, nginx, hosted on Vultr VPS with Cloudflare DNS. Stripe for payments, Solana for crypto integrations, Python for AI/scripts.' },
+];
+
+const LIVE_URLS = [
+  { url: 'https://123automateme.com', name: '123automateme.com', uptime: '2d' },
+  { url: 'https://app.vivalarassa.fun', name: 'Nexus AI', uptime: '3d' },
+  { url: 'https://nexus.vivalarassa.fun', name: 'Aussie Homeschool Hub', uptime: '7h' },
+  { url: 'https://admin.vivalarassa.fun', name: 'Admin Dashboard', uptime: '21d' },
+  { url: 'https://api.vivalarassa.fun', name: 'API Backend', uptime: '10d' },
+  { url: 'https://logs.vivalarassa.fun', name: 'Log Viewer', uptime: '10d' },
 ];
 
 export default function HomePage() {
@@ -271,6 +323,7 @@ export default function HomePage() {
         <StatsRow />
         <AboutSection />
         <PortfolioGrid />
+        <InfraSection />
         <ServicesSection />
         <ProcessSection />
         <TechStackSection />
@@ -284,9 +337,6 @@ export default function HomePage() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   1. HEADER
-═══════════════════════════════════════════════════════════════ */
 function Header() {
   return (
     <header className="fixed top-0 w-full z-50 border-b" style={{
@@ -305,17 +355,8 @@ function Header() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          {[
-            ['Portfolio', '#portfolio'],
-            ['Services', '#services'],
-            ['Process', '#process'],
-            ['Stack', '#stack'],
-            ['Status', '#status'],
-            ['FAQ', '#faq'],
-          ].map(([label, href]) => (
-            <a key={href} href={href} className="font-raj text-sm text-purple-300/70 hover:text-white transition-colors">
-              {label}
-            </a>
+          {[['Portfolio', '#portfolio'], ['Services', '#services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
+            <a key={h} href={h} className="font-raj text-sm text-purple-300/70 hover:text-white transition-colors">{l}</a>
           ))}
         </nav>
         <a href="#contact" className="px-5 py-2.5 rounded-lg font-raj font-bold text-sm text-white transition-all hover:scale-105"
@@ -327,9 +368,6 @@ function Header() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   2. HERO
-═══════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
     <section className="relative pt-28 pb-20 overflow-hidden min-h-[90vh] flex items-center">
@@ -344,7 +382,6 @@ function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center w-full">
         <div className="space-y-7">
-          {/* Status badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{
             background: 'rgba(236,72,153,0.08)', borderColor: 'rgba(236,72,153,0.2)',
           }}>
@@ -355,29 +392,26 @@ function Hero() {
             <span className="font-jb text-xs text-pink-300 tracking-wide">AVAILABLE FOR NEW PROJECTS · Q3 2026</span>
           </div>
 
-          {/* Title block */}
           <div>
             <div className="font-jb text-xs text-purple-500 tracking-widest mb-3">SOLO DEVELOPER · FULL-STACK ENGINEER</div>
             <h1 className="font-cyber text-5xl lg:text-7xl font-black tracking-tight leading-[0.9]">
               <span className="block text-white">KAI</span>
               <span className="block text-purple-400 mt-2">BUILDS,</span>
               <span className="block relative mt-2">
-                <span className="text-transparent bg-clip-text" style={{
-                  backgroundImage: 'linear-gradient(135deg,#ec4899,#d946ef,#a855f7)',
-                }}>SHIPS, EARNS.</span>
+                <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg,#ec4899,#d946ef,#a855f7)' }}>
+                  SHIPS, EARNS.
+                </span>
                 <div className="mt-2 h-1 w-56 rounded-full cv-underline opacity-60"/>
               </span>
             </h1>
           </div>
 
-          {/* Lede */}
           <p className="font-raj text-xl text-purple-200/70 leading-relaxed max-w-xl">
             I build full-stack SaaS products, AI agents, and trading infrastructure.
-            Currently running <span className="text-pink-400 font-semibold">12+ live products</span> on a
+            Currently running <span className="text-pink-400 font-semibold">18+ live products</span> on a
             single Vultr VPS, with <span className="text-pink-400 font-semibold">6 Stripe-integrated</span> and earning revenue.
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-wrap gap-4">
             <a href="#portfolio" className="group px-8 py-4 rounded-xl font-raj font-bold text-lg tracking-wide text-white transition-all hover:scale-105 flex items-center gap-3"
               style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)', boxShadow: '0 0 30px rgba(236,72,153,0.4)' }}>
@@ -389,7 +423,6 @@ function Hero() {
             </a>
           </div>
 
-          {/* Trust strip */}
           <div className="flex flex-wrap gap-6 font-jb text-xs text-purple-400/60">
             <span>● Solo developer</span>
             <span>● 47d+ uptime</span>
@@ -398,7 +431,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: floating ID card */}
         <div className="relative hidden lg:block">
           <div className="relative z-30 cv-float">
             <div className="rounded-2xl border p-6 cv-neon" style={{
@@ -418,32 +450,18 @@ function Hero() {
               </div>
 
               <div className="space-y-2 font-raj text-sm">
-                <div className="flex items-center justify-between py-2 border-b" style={{ borderColor: 'var(--cv-border)' }}>
-                  <span className="text-purple-400/70">Location</span>
-                  <span className="text-white">Australia (remote)</span>
-                </div>
-                <div className="flex items-center justify-between py-2 border-b" style={{ borderColor: 'var(--cv-border)' }}>
-                  <span className="text-purple-400/70">Experience</span>
-                  <span className="text-white">7+ years · since 2019</span>
-                </div>
-                <div className="flex items-center justify-between py-2 border-b" style={{ borderColor: 'var(--cv-border)' }}>
-                  <span className="text-purple-400/70">Stack</span>
-                  <span className="text-white">Next.js · Node · Solidity</span>
-                </div>
-                <div className="flex items-center justify-between py-2 border-b" style={{ borderColor: 'var(--cv-border)' }}>
-                  <span className="text-purple-400/70">Specialty</span>
-                  <span className="text-white">Ship fast · Earn</span>
-                </div>
-                <div className="flex items-center justify-between py-2">
-                  <span className="text-purple-400/70">Status</span>
-                  <span className="text-green-400 flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"/>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"/>
-                    </span>
-                    Available
-                  </span>
-                </div>
+                {[
+                  ['Location', 'Australia (remote)'],
+                  ['Experience', '7+ years · since 2019'],
+                  ['Stack', 'Next.js · Node · Solidity'],
+                  ['Specialty', 'Ship fast · Earn'],
+                  ['Status', 'Available'],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-center justify-between py-2 border-b" style={{ borderColor: 'var(--cv-border)' }}>
+                    <span className="text-purple-400/70">{k}</span>
+                    <span className={k === 'Status' ? 'text-green-400' : 'text-white'}>{v}</span>
+                  </div>
+                ))}
               </div>
 
               <div className="mt-5 pt-5 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -453,10 +471,9 @@ function Hero() {
             </div>
           </div>
 
-          {/* Floating badges */}
           <div className="absolute -top-3 -right-3 px-3 py-1.5 rounded-full font-cyber text-[10px] tracking-wider"
             style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)', boxShadow: '0 0 20px rgba(236,72,153,0.5)' }}>
-            12 LIVE
+            18 LIVE
           </div>
           <div className="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-full font-cyber text-[10px] tracking-wider bg-green-500 text-black"
             style={{ boxShadow: '0 0 20px rgba(16,185,129,0.5)' }}>
@@ -468,9 +485,6 @@ function Hero() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   3. STATS ROW
-═══════════════════════════════════════════════════════════════ */
 function StatsRow() {
   return (
     <section className="py-20 border-y" style={{ borderColor: 'var(--cv-border)' }}>
@@ -492,19 +506,7 @@ function StatsRow() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   4. ABOUT / SKILLS
-═══════════════════════════════════════════════════════════════ */
 function AboutSection() {
-  const skills = [
-    { cat: 'Frontend', items: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-    { cat: 'Backend', items: ['Node.js', 'Express', 'FastAPI', 'PostgreSQL', 'Prisma', 'SQLite', 'Redis'] },
-    { cat: 'DevOps', items: ['Docker', 'Docker Compose', 'nginx', 'PM2', 'GitHub Actions', 'Vultr VPS', 'Cloudflare'] },
-    { cat: 'Blockchain', items: ['Solana Web3', 'Jupiter API', 'Raydium', 'WebSocket feeds', 'Wallet auth'] },
-    { cat: 'AI / ML', items: ['Minimax M3', 'OpenAI API', 'Telegraf bots', 'Telegram API', 'Computer use'] },
-    { cat: 'Payments', items: ['Stripe Checkout', 'Stripe Subscriptions', 'Stripe Webhooks', 'Customer Portal', 'SOL payments'] },
-  ];
-
   return (
     <section className="py-32">
       <div className="max-w-7xl mx-auto px-6">
@@ -519,13 +521,13 @@ function AboutSection() {
             ENGINEER · BUILDER · SHIPPER
           </h2>
           <p className="font-raj text-xl text-purple-300/60 max-w-2xl mx-auto">
-            7+ years shipping production software. 12+ live products running right now.
+            7+ years shipping production software. 18+ live products running right now.
             From idea to earning revenue in 2-4 weeks.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map((s, i) => (
+          {SKILLS.map((s, i) => (
             <div key={i} className="rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:border-pink-500/40"
               style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
               <div className="font-cyber text-xs tracking-widest text-pink-400 mb-4">{s.cat.toUpperCase()}</div>
@@ -545,9 +547,6 @@ function AboutSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   5. PORTFOLIO GRID — all 12 products
-═══════════════════════════════════════════════════════════════ */
 function PortfolioGrid() {
   return (
     <section id="portfolio" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -560,7 +559,7 @@ function PortfolioGrid() {
             <span className="font-jb text-xs text-pink-300 tracking-wide">PORTFOLIO</span>
           </div>
           <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
-            12 LIVE PRODUCTS
+            18 LIVE PRODUCTS
           </h2>
           <p className="font-raj text-xl text-purple-300/60 max-w-2xl mx-auto">
             Every product below is running, deployed, and serving real users.
@@ -571,20 +570,18 @@ function PortfolioGrid() {
           {PRODUCTS.map((p, i) => (
             <div key={i} className="group relative rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-pink-500/40"
               style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
-              {/* Header */}
               <div className="flex items-start justify-between mb-4">
                 <span className="font-jb text-[10px] text-purple-500 tracking-widest uppercase">{p.cat}</span>
                 <span className={`px-2 py-1 rounded-full font-jb text-[10px] border ${
                   p.status === 'EARNING' ? 'bg-green-500/10 text-green-400 border-green-500/30' :
-                  p.status === 'LIVE' ? 'bg-purple-500/10 text-purple-400 border-purple-500/30' :
-                  p.status === 'READY' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' :
-                  'bg-slate-500/10 text-slate-400 border-slate-500/30'
+                  p.status === 'EARNING-READY' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' :
+                  p.status === 'READY' ? 'bg-blue-500/10 text-blue-400 border-blue-500/30' :
+                  'bg-purple-500/10 text-purple-400 border-purple-500/30'
                 }`}>
                   {p.status}
                 </span>
               </div>
 
-              {/* Icon + name */}
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
                   background: `${p.color}15`, border: `1px solid ${p.color}30`,
@@ -596,7 +593,6 @@ function PortfolioGrid() {
 
               <p className="font-raj text-sm text-purple-300/60 leading-relaxed mb-4">{p.desc}</p>
 
-              {/* Tags */}
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {p.tags.map(tag => (
                   <span key={tag} className="px-2 py-1 rounded-md font-jb text-[10px]"
@@ -606,7 +602,6 @@ function PortfolioGrid() {
                 ))}
               </div>
 
-              {/* Stack */}
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {p.stack.map(s => (
                   <span key={s} className="px-2 py-0.5 rounded font-jb text-[9px]"
@@ -616,7 +611,6 @@ function PortfolioGrid() {
                 ))}
               </div>
 
-              {/* Revenue + link */}
               <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--cv-border)' }}>
                 <span className="font-jb text-[10px] text-purple-400">Revenue: {p.revenue}</span>
                 {p.url && (
@@ -634,9 +628,55 @@ function PortfolioGrid() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   6. SERVICES
-═══════════════════════════════════════════════════════════════ */
+function InfraSection() {
+  return (
+    <section className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6" style={{
+            background: 'rgba(124,58,237,0.08)', borderColor: 'rgba(124,58,237,0.2)',
+          }}>
+            <Server className="w-4 h-4 text-purple-400"/>
+            <span className="font-jb text-xs text-purple-300 tracking-wide">INFRASTRUCTURE</span>
+          </div>
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            THE STACK UNDER THE HOOD
+          </h2>
+          <p className="font-raj text-xl text-purple-300/60 max-w-2xl mx-auto">
+            6 production services running 24/7 on a single Vultr VPS.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {INFRA.map((s, i) => (
+            <div key={i} className="rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:border-pink-500/40"
+              style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center"
+                  style={{ background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)' }}>
+                  <s.icon className="w-4 h-4 text-purple-400"/>
+                </div>
+                <div className="font-cyber text-xs font-bold tracking-wide text-white">{s.name}</div>
+              </div>
+              <p className="font-raj text-sm text-purple-300/60 mb-3">{s.desc}</p>
+              <div className="flex items-center justify-between text-[10px] font-jb">
+                {s.url ? (
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors">
+                    {s.url.replace('https://', '')}
+                  </a>
+                ) : (
+                  <span className="text-purple-500">internal</span>
+                )}
+                <span className="text-green-400">{s.uptime} uptime</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ServicesSection() {
   return (
     <section id="services" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -675,9 +715,6 @@ function ServicesSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   7. PROCESS
-═══════════════════════════════════════════════════════════════ */
 function ProcessSection() {
   return (
     <section id="process" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -715,27 +752,7 @@ function ProcessSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   8. TECH STACK DETAIL
-═══════════════════════════════════════════════════════════════ */
 function TechStackSection() {
-  const stack = [
-    { name: 'Next.js 15', use: 'Frontend + SSR', color: '#ec4899' },
-    { name: 'TypeScript', use: 'Type safety', color: '#d946ef' },
-    { name: 'Node.js', use: 'Backend runtime', color: '#a855f7' },
-    { name: 'Prisma', use: 'ORM + migrations', color: '#7c3aed' },
-    { name: 'PostgreSQL', use: 'Primary database', color: '#ec4899' },
-    { name: 'SQLite', use: 'Lightweight data', color: '#d946ef' },
-    { name: 'Docker', use: 'Containerization', color: '#a855f7' },
-    { name: 'nginx', use: 'Reverse proxy', color: '#7c3aed' },
-    { name: 'PM2', use: 'Process manager', color: '#ec4899' },
-    { name: 'Stripe', use: 'Payments', color: '#d946ef' },
-    { name: 'Solana', use: 'Web3 + wallets', color: '#a855f7' },
-    { name: 'Cloudflare', use: 'DNS + proxy', color: '#7c3aed' },
-    { name: 'Vultr', use: 'VPS hosting', color: '#ec4899' },
-    { name: 'GitHub', use: 'Source control', color: '#d946ef' },
-  ];
-
   return (
     <section id="stack" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
       <div className="max-w-7xl mx-auto px-6">
@@ -755,7 +772,7 @@ function TechStackSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {stack.map((s, i) => (
+          {STACK.map((s, i) => (
             <div key={i} className="rounded-xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:border-pink-500/40"
               style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
               <div className="flex items-center gap-3">
@@ -773,9 +790,6 @@ function TechStackSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   9. LIVE STATUS (UPTIME SHOWCASE)
-═══════════════════════════════════════════════════════════════ */
 function LiveStatusSection() {
   return (
     <section id="status" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -799,15 +813,7 @@ function LiveStatusSection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { url: 'https://123automateme.com', name: '123automateme.com', uptime: '2d', status: 'operational' },
-            { url: 'https://cards.123automateme.com', name: 'KAIO\'S CARDS', uptime: '2d', status: 'operational' },
-            { url: 'https://app.vivalarassa.fun', name: 'Nexus AI', uptime: '3d', status: 'operational' },
-            { url: 'https://admin.vivalarassa.fun', name: 'Admin Dashboard', uptime: '21d', status: 'operational' },
-            { url: 'https://api.vivalarassa.fun', name: 'API Backend', uptime: '10d', status: 'operational' },
-            { url: 'https://logs.vivalarassa.fun', name: 'Log Viewer', uptime: '10d', status: 'operational' },
-            { url: 'https://nexus.vivalarassa.fun', name: 'Aussie Homeschool', uptime: '7h', status: 'operational' },
-          ].map((s, i) => (
+          {LIVE_URLS.map((s, i) => (
             <div key={i} className="rounded-xl border p-4 flex items-center justify-between"
               style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
               <div className="flex items-center gap-3 min-w-0">
@@ -834,9 +840,6 @@ function LiveStatusSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   10. PULL QUOTE
-═══════════════════════════════════════════════════════════════ */
 function PullQuote() {
   return (
     <section className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -848,16 +851,13 @@ function PullQuote() {
         </blockquote>
         <div className="font-raj text-lg text-purple-300/50">
           <div className="font-semibold text-purple-200/80 mb-1">My operating principle</div>
-          <div>12 live products · 6 earning · 47d uptime</div>
+          <div>18 live products · 6 earning · 47d uptime</div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   11. FAQ
-═══════════════════════════════════════════════════════════════ */
 function FAQSection() {
   return (
     <section id="faq" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -883,9 +883,6 @@ function FAQSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   12. FINAL CTA + CONTACT
-═══════════════════════════════════════════════════════════════ */
 function FinalCTA() {
   return (
     <section id="contact" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
@@ -902,41 +899,28 @@ function FinalCTA() {
               Let&apos;s talk about your project. Email, call, or fill out the form - I respond within 24 hours.
             </p>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
-                  background: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.2)',
-                }}>
-                  <Mail className="w-5 h-5 text-pink-400"/>
-                </div>
-                <div>
-                  <div className="font-jb text-[10px] text-purple-500">EMAIL</div>
-                  <a href="mailto:hello@123automateme.com" className="font-raj text-lg text-white hover:text-pink-400 transition-colors">
-                    hello@123automateme.com
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
-                  background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)',
-                }}>
-                  <Phone className="w-5 h-5 text-purple-400"/>
-                </div>
-                <div>
-                  <div className="font-jb text-[10px] text-purple-500">PHONE</div>
-                  <span className="font-raj text-lg text-white">Available on request</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
-                  background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)',
-                }}>
-                  <Clock className="w-5 h-5 text-purple-400"/>
-                </div>
-                <div>
-                  <div className="font-jb text-[10px] text-purple-500">RESPONSE TIME</div>
-                  <span className="font-raj text-lg text-white">Within 24 hours</span>
-                </div>
-              </div>
+              {[
+                { Icon: Mail, label: 'EMAIL', val: 'hello@123automateme.com', href: 'mailto:hello@123automateme.com' },
+                { Icon: Phone, label: 'PHONE', val: 'Available on request', href: null },
+                { Icon: Clock, label: 'RESPONSE TIME', val: 'Within 24 hours', href: null },
+              ].map(({ Icon, label, val, href }, i) => {
+                const inner = (
+                  <div>
+                    <div className="font-jb text-[10px] text-purple-500">{label}</div>
+                    <span className="font-raj text-lg text-white">{val}</span>
+                  </div>
+                );
+                return (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{
+                      background: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.2)',
+                    }}>
+                      <Icon className="w-5 h-5 text-pink-400"/>
+                    </div>
+                    {href ? <a href={href} className="hover:text-pink-400 transition-colors">{inner}</a> : inner}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -945,20 +929,17 @@ function FinalCTA() {
               <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off"/>
               <div>
                 <label className="font-jb text-xs text-purple-500 block mb-2">NAME</label>
-                <input type="text" name="name" required
-                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30"
+                <input type="text" name="name" required className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30"
                   style={{ background: 'rgba(10,5,20,0.5)', border: '1px solid var(--cv-border)' }} placeholder="Your name"/>
               </div>
               <div>
                 <label className="font-jb text-xs text-purple-500 block mb-2">EMAIL</label>
-                <input type="email" name="email" required
-                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30"
+                <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30"
                   style={{ background: 'rgba(10,5,20,0.5)', border: '1px solid var(--cv-border)' }} placeholder="you@email.com"/>
               </div>
               <div>
                 <label className="font-jb text-xs text-purple-500 block mb-2">PROJECT</label>
-                <textarea name="message" required rows={4}
-                  className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30 resize-none"
+                <textarea name="message" required rows={4} className="w-full px-4 py-3 rounded-xl font-raj text-white outline-none focus:ring-2 focus:ring-pink-500/30 resize-none"
                   style={{ background: 'rgba(10,5,20,0.5)', border: '1px solid var(--cv-border)' }} placeholder="Tell me about your project..."/>
               </div>
               <button type="submit"
@@ -974,9 +955,6 @@ function FinalCTA() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   13. FOOTER
-═══════════════════════════════════════════════════════════════ */
 function Footer() {
   return (
     <footer className="border-t py-12" style={{ borderColor: 'var(--cv-border)' }}>
@@ -996,8 +974,8 @@ function Footer() {
           <div>
             <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">PRODUCTS</div>
             <ul className="space-y-2 font-raj text-sm text-purple-300/50">
-              <li><a href="https://cards.123automateme.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">KAIO&apos;S CARDS</a></li>
               <li><a href="https://app.vivalarassa.fun" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">Nexus AI</a></li>
+              <li><a href="https://nexus.vivalarassa.fun" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">Aussie Homeschool</a></li>
               <li><Link href="/designwithhermes" className="hover:text-pink-400 transition-colors">Design With Hermes</Link></li>
             </ul>
           </div>
@@ -1018,12 +996,8 @@ function Footer() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t text-sm" style={{ borderColor: 'var(--cv-border)' }}>
-          <span className="font-jb text-xs text-purple-500">
-            © 2026 123automateme.com · All rights reserved
-          </span>
-          <span className="font-jb text-xs text-purple-500/40 mt-2 md:mt-0">
-            Built with Next.js · Deployed on Vultr · DNS via Cloudflare
-          </span>
+          <span className="font-jb text-xs text-purple-500">© 2026 123automateme.com · All rights reserved</span>
+          <span className="font-jb text-xs text-purple-500/40 mt-2 md:mt-0">Built with Next.js · Deployed on Vultr · DNS via Cloudflare</span>
         </div>
       </div>
     </footer>
