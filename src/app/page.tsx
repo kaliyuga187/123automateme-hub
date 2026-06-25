@@ -355,9 +355,12 @@ function Header() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          {[['Portfolio', '#portfolio'], ['Services', '#services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
+          {[['Portfolio', '#portfolio'], ['Services', '/services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
             <a key={h} href={h} className="font-raj text-sm text-purple-300/70 hover:text-white transition-colors">{l}</a>
           ))}
+          <Link href="/hire" className="px-4 py-1.5 rounded-lg font-raj font-bold text-xs text-white" style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)' }}>
+            Hire Me
+          </Link>
         </nav>
         <a href="#contact" className="px-5 py-2.5 rounded-lg font-raj font-bold text-sm text-white transition-all hover:scale-105"
           style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)', boxShadow: '0 0 20px rgba(236,72,153,0.3)' }}>
@@ -413,14 +416,14 @@ function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="#portfolio" className="group px-8 py-4 rounded-xl font-raj font-bold text-lg tracking-wide text-white transition-all hover:scale-105 flex items-center gap-3"
+            <Link href="/services" className="group px-8 py-4 rounded-xl font-raj font-bold text-lg tracking-wide text-white transition-all hover:scale-105 flex items-center gap-3"
               style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)', boxShadow: '0 0 30px rgba(236,72,153,0.4)' }}>
-              VIEW PORTFOLIO <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
-            </a>
-            <a href="#contact" className="px-8 py-4 rounded-xl border font-raj font-bold text-lg text-purple-300 hover:text-white hover:border-pink-500/50 transition-all"
+              BROWSE SERVICES <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
+            </Link>
+            <Link href="/hire" className="px-8 py-4 rounded-xl border font-raj font-bold text-lg text-purple-300 hover:text-white hover:border-pink-500/50 transition-all"
               style={{ borderColor: 'var(--cv-border)' }}>
-              HIRE ME
-            </a>
+              HIRE ME MONTHLY
+            </Link>
           </div>
 
           <div className="flex flex-wrap gap-6 font-jb text-xs text-purple-400/60">
@@ -698,7 +701,7 @@ function ServicesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((s, i) => (
-            <div key={i} className="group rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-pink-500/40"
+            <Link key={i} href={`/services/${s.slug}`} className="group rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-pink-500/40"
               style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{
                 background: `${s.color}12`, border: `1px solid ${s.color}25`,
@@ -707,7 +710,10 @@ function ServicesSection() {
               </div>
               <h3 className="font-cyber text-sm font-bold tracking-wide text-white mb-3">{s.title}</h3>
               <p className="font-raj text-sm text-purple-300/60 leading-relaxed">{s.desc}</p>
-            </div>
+              <div className="mt-4 font-jb text-[10px] tracking-widest" style={{ color: s.color }}>
+                SEE PACKAGES →
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -887,16 +893,34 @@ function FinalCTA() {
   return (
     <section id="contact" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
       <div className="max-w-5xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            READY TO<br/>
+            <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg,#ec4899,#d946ef)' }}>
+              AUTOMATE?
+            </span>
+          </h2>
+          <p className="font-raj text-xl text-purple-300/60 leading-relaxed max-w-2xl mx-auto mb-8">
+            Three ways to start. Pick what fits — Stripe checkout takes 60 seconds,
+            or send a brief and I&apos;ll respond within 24 hours.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Link href="/services" className="px-6 py-3 rounded-xl font-raj font-bold text-white"
+              style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)', boxShadow: '0 0 20px rgba(236,72,153,0.3)' }}>
+              BROWSE 18 SERVICE PACKAGES →
+            </Link>
+            <Link href="/hire" className="px-6 py-3 rounded-xl font-raj font-bold text-pink-300 border hover:bg-pink-500/10"
+              style={{ borderColor: 'rgba(236,72,153,0.4)' }}>
+              HIRE ME MONTHLY ($5K/MO)
+            </Link>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white">
-              READY TO<br/>
-              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg,#ec4899,#d946ef)' }}>
-                AUTOMATE?
-              </span>
-            </h2>
-            <p className="font-raj text-xl text-purple-300/60 leading-relaxed">
-              Let&apos;s talk about your project. Email, call, or fill out the form - I respond within 24 hours.
+            <h3 className="font-cyber text-xl font-bold text-white tracking-wide">OR JUST SAY HI</h3>
+            <p className="font-raj text-purple-300/60 leading-relaxed">
+              For custom work, partnerships, or anything not covered by the packages above.
             </p>
             <div className="space-y-4">
               {[
@@ -983,7 +1007,8 @@ function Footer() {
             <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">PAGES</div>
             <ul className="space-y-2 font-raj text-sm text-purple-300/50">
               <li><a href="#portfolio" className="hover:text-pink-400 transition-colors">Portfolio</a></li>
-              <li><a href="#services" className="hover:text-pink-400 transition-colors">Services</a></li>
+              <li><Link href="/services" className="hover:text-pink-400 transition-colors">Service Packages</Link></li>
+              <li><Link href="/hire" className="hover:text-pink-400 transition-colors">Hire Monthly ($5K)</Link></li>
               <li><a href="#contact" className="hover:text-pink-400 transition-colors">Contact</a></li>
             </ul>
           </div>
