@@ -11,13 +11,13 @@ import { getStripe, isStripeConfigured } from "@/lib/stripe";
 import { getPackageById, formatPrice } from "@/lib/services";
 
 interface PageProps {
-  searchParams: { session_id?: string };
+  searchParams: Promise<{ session_id?: string }>;
 }
 
 export const dynamic = "force-dynamic";
 
 export default async function ServiceThanksPage({ searchParams }: PageProps) {
-  const sessionId = searchParams.session_id;
+  const { session_id: sessionId } = await searchParams;
 
   let receipt: {
     serviceTitle: string;
