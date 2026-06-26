@@ -248,12 +248,12 @@ const INFRA = [
 ];
 
 const SERVICES = [
-  { icon: Code2, title: 'FULL-STACK SAAS', desc: 'Next.js 15 + Prisma + PostgreSQL. From idea to production. Stripe-integrated, Docker-deployed, auto-scaling.', color: '#ec4899' },
-  { icon: Bot, title: 'AI AGENTS & BOTS', desc: 'Custom AI bots for research, trading, content. Telegram, Discord, web interfaces. Real LLM integration.', color: '#d946ef' },
-  { icon: LineChart, title: 'TRADING INFRASTRUCTURE', desc: 'Solana, Ethereum, BSC. DEX data, bonding curves, real-time analytics. Subscription-gated access.', color: '#a855f7' },
-  { icon: Wrench, title: 'DEVOPS & INFRA', desc: 'Docker orchestration, CI/CD, monitoring, log aggregation. nginx + certbot + Cloudflare.', color: '#7c3aed' },
-  { icon: Globe, title: 'WEB DESIGN', desc: 'Landing pages, marketing sites, product pages. Hand-crafted, conversion-focused. Brand: Design With Hermes.', color: '#ec4899' },
-  { icon: Hammer, title: 'MOBILE APPS', desc: 'Expo + React Native, iOS + Android from one codebase. Native feel, cross-platform.', color: '#d946ef' },
+  { slug: "saas", icon: Code2, title: 'FULL-STACK SAAS', desc: 'Next.js 15 + Prisma + PostgreSQL. From idea to production. Stripe-integrated, Docker-deployed, auto-scaling.', color: '#ec4899' },
+  { slug: "ai-agents", icon: Bot, title: 'AI AGENTS & BOTS', desc: 'Custom AI bots for research, trading, content. Telegram, Discord, web interfaces. Real LLM integration.', color: '#d946ef' },
+  { slug: "trading", icon: LineChart, title: 'TRADING INFRASTRUCTURE', desc: 'Solana, Ethereum, BSC. DEX data, bonding curves, real-time analytics. Subscription-gated access.', color: '#a855f7' },
+  { slug: "devops", icon: Wrench, title: 'DEVOPS & INFRA', desc: 'Docker orchestration, CI/CD, monitoring, log aggregation. nginx + certbot + Cloudflare.', color: '#7c3aed' },
+  { slug: "design", icon: Globe, title: 'WEB DESIGN', desc: 'Landing pages, marketing sites, product pages. Hand-crafted, conversion-focused. Brand: Design With Hermes.', color: '#ec4899' },
+  { slug: "mobile", icon: Hammer, title: 'MOBILE APPS', desc: 'Expo + React Native, iOS + Android from one codebase. Native feel, cross-platform.', color: '#d946ef' },
 ];
 
 const STATS = [
