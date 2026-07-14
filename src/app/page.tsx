@@ -7,7 +7,10 @@ import {
   Database, ChevronRight, ExternalLink, Wallet,
   Hammer, Truck, Mic, BarChart3, Compass, GraduationCap,
   Coins, TrendingUp, Eye, FileText, Radio,
+  ShoppingCart, Package, Crosshair, MessageSquare,
+  Brain, Store, Target, Copy, Gauge,
 } from 'lucide-react';
+import { CopyAddressButton, PayButton } from './components/SolPayment';
 
 /* ════════════════════════════════════════════════════════════════
    123automateme.com — SaaS CV (2026)
@@ -313,6 +316,71 @@ const LIVE_URLS = [
   { url: 'https://logs.vivalarassa.fun', name: 'Log Viewer', uptime: '10d' },
 ];
 
+const STORE_CATEGORIES = [
+  {
+    name: 'Solana Trading Bots',
+    products: [
+      { name: 'PUMP.ENGINE', desc: 'Pump.fun pre-graduation sniping via gRPC', sol: 11, icon: Crosshair, color: '#ec4899' },
+      { name: 'CEX+Solana Trading Engine', desc: 'Multi-venue engine with MEV protection + Redis orchestration', sol: 17.5, icon: Cpu, color: '#d946ef' },
+      { name: 'DEX Replication Bot', desc: 'Copy-trading from on-chain wallets via Playwright', sol: 13, icon: Copy, color: '#a855f7' },
+      { name: 'Token-2022 Solana Agent', desc: 'Autonomous fee collection for Token-2022 SPL tokens', sol: 9, icon: Bot, color: '#7c3aed' },
+      { name: 'Solana Token Sniper', desc: 'Professional sniping dApp with MEV protection', sol: 13, icon: Zap, color: '#ec4899' },
+      { name: 'MetaLaunch AI', desc: 'AI-powered meme coin launcher via Pump.fun', sol: 15, icon: Rocket, color: '#d946ef' },
+      { name: 'Solana Wallet Tracker', desc: 'AI-powered wallet analytics and monitoring', sol: 11, icon: Eye, color: '#a855f7' },
+      { name: 'Solana Bundler UI', desc: 'Frontend template for bundler bot management', sol: 4.5, icon: Layers, color: '#7c3aed' },
+    ],
+  },
+  {
+    name: 'Polymarket Suite',
+    products: [
+      { name: 'Polymarket Whale Scanner', desc: 'VWAP-based whale detection and PnL ranking', sol: 5.5, icon: Target, color: '#ec4899' },
+      { name: 'Polymarket Dashboard', desc: 'React analytics dashboard for whale activity', sol: 7.5, icon: BarChart3, color: '#d946ef' },
+      { name: 'PolyBot Bayesian', desc: 'LMSR/Bayesian automated Polymarket trader', sol: 6.5, icon: Brain, color: '#a855f7' },
+      { name: 'Polymarket Discord Bot', desc: 'Discord alerts + copy-trading (13 commands)', sol: 6.5, icon: MessageSquare, color: '#7c3aed' },
+      { name: 'Polyback', desc: 'Strategy reverse-engineering tool', sol: 5.5, icon: Eye, color: '#ec4899' },
+    ],
+  },
+  {
+    name: 'Dashboards & Hubs',
+    products: [
+      { name: 'Apex Trading Dashboard', desc: 'Consolidated multi-bot management dashboard', sol: 11, icon: LineChart, color: '#d946ef' },
+      { name: 'NEXUS AI Trading Hub', desc: 'Multi-chain trading platform (Forex, Crypto, AI)', sol: 22, icon: Cpu, color: '#a855f7' },
+      { name: 'Quant Research Engine', desc: '8-agent AI research platform for strategy development', sol: 11, icon: Compass, color: '#7c3aed' },
+    ],
+  },
+  {
+    name: 'Analytics & Intelligence',
+    products: [
+      { name: 'Primos NFT Leaderboard', desc: 'Solana NFT wallet rankings', sol: 4.5, icon: TrendingUp, color: '#ec4899' },
+      { name: 'Bubble Maps', desc: 'Wallet/token relationship visualization', sol: 9, icon: Compass, color: '#d946ef' },
+      { name: 'Apex Research Bot', desc: 'Automated trading research aggregation', sol: 9, icon: Bot, color: '#a855f7' },
+    ],
+  },
+  {
+    name: 'Telegram & Adaptive',
+    products: [
+      { name: 'TG Copy Tracker', desc: 'Mass copy-trading alerts via Telegram', sol: 6.5, icon: Copy, color: '#7c3aed' },
+      { name: 'OptimusPrimoPack v2', desc: 'Telegram commerce platform with SOL payments', sol: 11, icon: Package, color: '#ec4899' },
+      { name: 'Memerizzle', desc: 'Meme coin trading bot', sol: 3.5, icon: Coins, color: '#d946ef' },
+      { name: 'Memory Extension', desc: 'Persistent memory upgrade for any trading bot', sol: 4.5, icon: Brain, color: '#a855f7' },
+    ],
+  },
+  {
+    name: 'Marketplace',
+    products: [
+      { name: 'K187 Web Store', desc: 'Trading bot marketplace storefront', sol: 9, icon: Store, color: '#7c3aed' },
+    ],
+  },
+];
+
+const STORE_BUNDLES = [
+  { name: 'Polymarket Complete', items: 'Scanner + Dashboard + PolyBot + Discord Bot + Polyback', sol: 22, savings: '5 tools' },
+  { name: 'Solana Sniper Pack', items: 'PUMP.ENGINE + Token Sniper + MetaLaunch AI', sol: 33, savings: '3 tools' },
+  { name: 'Apex Operations', items: 'Dashboard + Research Bot + NEXUS Hub', sol: 35, savings: '3 tools' },
+  { name: 'Telegram Commerce', items: 'TG Copy Tracker + OptimusPrimoPack + Memerizzle', sol: 17.5, savings: '3 tools' },
+  { name: 'Full Trading Infrastructure', items: 'All 24 products', sol: 130, savings: '24 tools' },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -323,6 +391,7 @@ export default function HomePage() {
         <StatsRow />
         <AboutSection />
         <PortfolioGrid />
+        <BotStoreSection />
         <InfraSection />
         <ServicesSection />
         <ProcessSection />
@@ -355,7 +424,7 @@ function Header() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          {[['Portfolio', '#portfolio'], ['Services', '/services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
+          {[['Portfolio', '#portfolio'], ['Bot Store', '#store'], ['Services', '/services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
             <a key={h} href={h} className="font-raj text-sm text-purple-300/70 hover:text-white transition-colors">{l}</a>
           ))}
           <Link href="/hire" className="px-4 py-1.5 rounded-lg font-raj font-bold text-xs text-white" style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)' }}>
@@ -625,6 +694,140 @@ function PortfolioGrid() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BotStoreSection() {
+  return (
+    <section id="store" className="py-32 border-t" style={{ borderColor: 'var(--cv-border)' }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6" style={{
+            background: 'linear-gradient(135deg,rgba(153,69,255,0.12),rgba(20,241,149,0.08))',
+            borderColor: 'rgba(153,69,255,0.3)',
+          }}>
+            <ShoppingCart className="w-4 h-4 text-[#14F195]"/>
+            <span className="font-jb text-xs tracking-wide" style={{ color: '#14F195' }}>BOT STORE · PAY WITH SOL</span>
+          </div>
+          <h2 className="font-cyber text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            24 TRADING BOTS & TEMPLATES
+          </h2>
+          <p className="font-raj text-xl text-purple-300/60 max-w-2xl mx-auto mb-8">
+            Production-ready trading bots, analytics tools, and templates — pay with Solana.
+            Full source code, documentation, and 30-day support included.
+          </p>
+          <div className="max-w-lg mx-auto">
+            <CopyAddressButton />
+          </div>
+        </div>
+
+        <div className="space-y-16">
+          {STORE_CATEGORIES.map((cat, ci) => (
+            <div key={ci}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px flex-1" style={{ background: 'var(--cv-border)' }}/>
+                <span className="font-cyber text-xs tracking-widest text-pink-400">{cat.name.toUpperCase()}</span>
+                <div className="h-px flex-1" style={{ background: 'var(--cv-border)' }}/>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {cat.products.map((p, pi) => (
+                  <div key={pi} className="group rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:border-pink-500/40 flex flex-col"
+                    style={{ background: 'var(--cv-card)', borderColor: 'var(--cv-border)' }}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{
+                        background: `${p.color}15`, border: `1px solid ${p.color}30`,
+                      }}>
+                        <p.icon className="w-4 h-4" style={{ color: p.color }}/>
+                      </div>
+                      <h3 className="font-cyber text-[11px] font-bold tracking-wide text-white leading-tight">{p.name}</h3>
+                    </div>
+                    <p className="font-raj text-sm text-purple-300/60 leading-relaxed mb-4 flex-1">{p.desc}</p>
+                    <div className="pt-3 border-t space-y-3" style={{ borderColor: 'var(--cv-border)' }}>
+                      <div className="flex items-center justify-between">
+                        <span className="font-cyber text-sm font-bold text-transparent bg-clip-text"
+                          style={{ backgroundImage: 'linear-gradient(135deg,#9945FF,#14F195)' }}>
+                          {p.sol} SOL
+                        </span>
+                        <span className="font-jb text-[10px] text-purple-500">source code</span>
+                      </div>
+                      <PayButton amount={p.sol} label={p.name} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-20">
+          <div className="text-center mb-10">
+            <h3 className="font-cyber text-2xl font-bold tracking-wide text-white mb-2">BUNDLE DEALS</h3>
+            <p className="font-raj text-purple-300/60">Save big with curated bundles. Pay with SOL.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {STORE_BUNDLES.map((b, i) => (
+              <div key={i} className={`rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1 flex flex-col ${
+                b.name === 'Full Trading Infrastructure' ? 'hover:border-pink-500/60 ring-1 ring-pink-500/20' : 'hover:border-pink-500/40'
+              }`} style={{
+                background: b.name === 'Full Trading Infrastructure'
+                  ? 'linear-gradient(160deg,rgba(153,69,255,0.1),rgba(20,241,149,0.05))'
+                  : 'var(--cv-card)',
+                borderColor: b.name === 'Full Trading Infrastructure' ? 'rgba(153,69,255,0.4)' : 'var(--cv-border)',
+              }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-cyber text-xs font-bold tracking-wide text-white">{b.name}</h4>
+                  <span className="px-2 py-1 rounded-full font-jb text-[10px] border"
+                    style={{ background: 'rgba(20,241,149,0.08)', color: '#14F195', borderColor: 'rgba(20,241,149,0.2)' }}>
+                    {b.savings}
+                  </span>
+                </div>
+                <p className="font-raj text-sm text-purple-300/50 mb-4 flex-1">{b.items}</p>
+                <div className="space-y-3">
+                  <div className="font-cyber text-lg font-bold text-transparent bg-clip-text"
+                    style={{ backgroundImage: 'linear-gradient(135deg,#9945FF,#14F195)' }}>
+                    {b.sol} SOL
+                  </div>
+                  <PayButton amount={b.sol} label={b.name} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16 rounded-2xl border p-8 text-center" style={{
+          background: 'linear-gradient(160deg,rgba(153,69,255,0.06),rgba(20,241,149,0.04))',
+          borderColor: 'rgba(153,69,255,0.2)',
+        }}>
+          <h3 className="font-cyber text-lg font-bold text-white mb-3 tracking-wide">HOW TO PAY</h3>
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="space-y-2">
+              <div className="font-cyber text-2xl font-black text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#9945FF,#14F195)' }}>01</div>
+              <div className="font-raj text-sm text-white">Click &quot;PAY&quot; on any product</div>
+              <div className="font-raj text-xs text-purple-300/50">Opens your Phantom / Solflare wallet</div>
+            </div>
+            <div className="space-y-2">
+              <div className="font-cyber text-2xl font-black text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#9945FF,#14F195)' }}>02</div>
+              <div className="font-raj text-sm text-white">Send the exact SOL amount</div>
+              <div className="font-raj text-xs text-purple-300/50">Or copy the address and send manually</div>
+            </div>
+            <div className="space-y-2">
+              <div className="font-cyber text-2xl font-black text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#9945FF,#14F195)' }}>03</div>
+              <div className="font-raj text-sm text-white">Get your source code in 24h</div>
+              <div className="font-raj text-xs text-purple-300/50">Full repo access + documentation + support</div>
+            </div>
+          </div>
+          <div className="max-w-lg mx-auto">
+            <CopyAddressButton />
+          </div>
+          <p className="mt-4 font-raj text-xs text-purple-300/30">
+            After payment, send your transaction signature to hello@123automateme.com for instant delivery.
+          </p>
         </div>
       </div>
     </section>
@@ -998,6 +1201,7 @@ function Footer() {
           <div>
             <div className="font-jb text-xs text-purple-500 tracking-widest mb-4">PRODUCTS</div>
             <ul className="space-y-2 font-raj text-sm text-purple-300/50">
+              <li><a href="#store" className="hover:text-pink-400 transition-colors">Bot Store (24 bots)</a></li>
               <li><a href="https://app.vivalarassa.fun" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">Nexus AI</a></li>
               <li><a href="https://nexus.vivalarassa.fun" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">Aussie Homeschool</a></li>
               <li><Link href="/designwithhermes" className="hover:text-pink-400 transition-colors">Design With Hermes</Link></li>
