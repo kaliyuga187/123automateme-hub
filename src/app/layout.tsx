@@ -72,6 +72,7 @@ function SiteHeader() {
 
         <div className="hidden items-center gap-8 text-sm text-muted md:flex">
           <Link href="#services"   className="transition hover:text-fg">Services</Link>
+          <Link href="#store"      className="transition hover:text-fg">Bot Store</Link>
           <Link href="#process"    className="transition hover:text-fg">Process</Link>
           <Link href="#products"   className="transition hover:text-fg">Products</Link>
           <Link href="#faq"        className="transition hover:text-fg">FAQ</Link>
@@ -126,10 +127,10 @@ function SiteFooter() {
             <FooterColumn
               title="Products"
               links={[
-                { label: 'MetaLaunch AI',  href: '#products' },
-                { label: 'K187 Bot Store', href: '#products' },
-                { label: 'Roadmap',        href: '#' },
-                { label: 'Changelog',      href: '#' },
+                { label: 'Bot Store (24)', href: '#store' },
+                { label: 'MetaLaunch AI',  href: '#store' },
+                { label: 'K187 Bot Store', href: '#store' },
+                { label: 'Bundles',        href: '#store' },
               ]}
             />
             <FooterColumn
