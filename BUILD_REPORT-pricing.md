@@ -4,6 +4,14 @@
 > Source: `C:\Users\nk187\123automateme-hub`
 > Status: **CODE-COMPLETE** · validation gate green · ready to deploy
 
+## Maintenance update (2026-07-17)
+
+- Added `pnpm test` to `.github/workflows/ci.yml` so PR CI validates the Stripe
+  checkout/webhook test suite automatically.
+- Updated `README.md` validation gate to require all four checks:
+  `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm test`, `pnpm build`.
+- Linked `DEPLOY-RUNBOOK.md` in `README.md` for the Stripe first-payment runbook.
+
 ---
 
 ## What this session added
