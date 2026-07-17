@@ -31,10 +31,18 @@ Open [http://localhost:3738](http://localhost:3738) in your browser.
 ```bash
 pnpm install --frozen-lockfile
 pnpm typecheck
+pnpm test
 pnpm build
 ```
 
-All three must pass.
+All four must pass.
+
+## Stripe checkout go-live runbook
+
+For the exact "first payment" checklist (test keys, webhook registration, smoke test,
+and live-mode cutover), follow:
+
+- `DEPLOY-RUNBOOK.md`
 
 ## Contact form delivery
 
