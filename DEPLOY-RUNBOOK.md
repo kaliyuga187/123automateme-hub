@@ -93,7 +93,7 @@ Same steps, but:
 - Link "Pricing" in the single-page nav (cosmetic)
 - Create a real Customer Portal link in the Stripe dashboard
   (the success page currently links to a placeholder)
-- Consider adding `pnpm test` to a CI workflow
+- CI now runs `pnpm install`, `pnpm typecheck`, `pnpm test`, and `pnpm build`
 
 ## Related
 
