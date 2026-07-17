@@ -424,7 +424,7 @@ function Header() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          {[['Portfolio', '#portfolio'], ['Bot Store', '#store'], ['Services', '/services'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
+          {[['Portfolio', '#portfolio'], ['Bot Store', '#store'], ['Services', '/services'], ['Pricing', '/pricing'], ['Process', '#process'], ['Stack', '#stack'], ['Status', '#status'], ['FAQ', '#faq']].map(([l, h]) => (
             <a key={h} href={h} className="font-raj text-sm text-purple-300/70 hover:text-white transition-colors">{l}</a>
           ))}
           <Link href="/hire" className="px-4 py-1.5 rounded-lg font-raj font-bold text-xs text-white" style={{ background: 'linear-gradient(135deg,#ec4899,#d946ef)' }}>
